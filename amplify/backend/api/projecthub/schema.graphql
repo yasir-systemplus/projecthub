@@ -1,20 +1,56 @@
-type Blog @model {
-  id: ID!
-  name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
-}
-
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+type Workspace @model {
   id: ID!
   title: String!
-  blogID: ID!
-  blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  description: String
+
+  creatorID: ID!
+  creator: User @connection(fields: ["creatorID"])
+
+  teamMembers: [WorkspaceMember]
+    @connection(keyName: "byWorkspace", fields: ["id"])
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+type WorkspaceMember
+  @model(queries: null)
+  @key(name: "byWorkspace", fields: ["workspaceID", "teamMemberID"])
+  @key(name: "byTeamMember", fields: ["teamMemberID", "workspaceID"]) {
   id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
-  content: String!
+
+  workspaceID: ID!
+  workspace: Workspace! @connection(fields: ["workspaceID"])
+
+  teamMemberID: ID!
+  teamMember: User! @connection(fields: ["teamMemberID"])
 }
+
+type User @model {
+  id: ID!
+  email: AWSEmail!
+  firstName: String
+  lastName: String
+  workspaces: [WorkspaceMember]
+    @connection(keyName: "byTeamMember", fields: ["id"])
+}
+
+
+
+# type Blog @model {
+#   id: ID!
+#   name: String!
+#   posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+# }
+
+# type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+#   id: ID!
+#   title: String!
+#   blogID: ID!
+#   blog: Blog @connection(fields: ["blogID"])
+#   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+# }
+
+# type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+#   id: ID!
+#   postID: ID!
+#   post: Post @connection(fields: ["postID"])
+#   content: String!
+# }
