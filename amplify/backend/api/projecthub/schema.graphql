@@ -1,15 +1,17 @@
+# Reviewed
 type Workspace @model {
   id: ID!
   title: String!
   description: String
 
-  creatorID: ID!
-  creator: User @connection(fields: ["creatorID"])
+  managerID: ID!
+  manager: User @connection(fields: ["managerID"])
 
   teamMembers: [WorkspaceMember]
     @connection(keyName: "byWorkspace", fields: ["id"])
 }
 
+# Reviewed
 type WorkspaceMember
   @model(queries: null)
   @key(name: "byWorkspace", fields: ["workspaceID", "teamMemberID"])
@@ -23,34 +25,61 @@ type WorkspaceMember
   teamMember: User! @connection(fields: ["teamMemberID"])
 }
 
+# Reviewed
 type User @model {
   id: ID!
   email: AWSEmail!
   firstName: String
   lastName: String
+  userType: String!
+
   workspaces: [WorkspaceMember]
     @connection(keyName: "byTeamMember", fields: ["id"])
 }
 
+# Reviewed
+type Task @model {
+  id: ID!
+  title: String!
+  priority: String
+  description: String
+  taskStatus: String
 
+  creatorID: ID!
+  creator: User @connection(fields: ["creatorID"])
 
-# type Blog @model {
-#   id: ID!
-#   name: String!
-#   posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
-# }
+  assigneeID: ID!
+  assignee: User @connection(fields: ["assigneeID"])
 
-# type Post @model @key(name: "byBlog", fields: ["blogID"]) {
-#   id: ID!
-#   title: String!
-#   blogID: ID!
-#   blog: Blog @connection(fields: ["blogID"])
-#   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
-# }
+  attachments: [Attachment] @connection(fields: ["id"])
+  comments: [Comment] @connection(fields: ["id"])
+}
 
-# type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
-#   id: ID!
-#   postID: ID!
-#   post: Post @connection(fields: ["postID"])
-#   content: String!
-# }
+#
+type Comment
+  @model
+  @key(name: "byTask", fields: ["taskID"])
+  @key(name: "byCommentedOnID", fields: ["commentedOnID"])
+  @key(name: "byAttachment", fields: ["attachmentID"]) {
+  id: ID!
+  description: String!
+  taskID: ID!
+
+  commentatorID: ID!
+  commentator: User @connection(fields: ["commentatorID"])
+
+  commentedOnID: ID
+
+  attachmentID: ID
+
+  replies: [Comment] @connection(fields: ["id"])
+}
+
+type Attachment @model @key(name: "byTask", fields: ["taskID"]) {
+  id: ID!
+  type: String!
+  url: AWSURL!
+  taskID: ID
+
+  comments: [Comment] @connection(keyName: "byAttachment", fields: ["id"])
+}
