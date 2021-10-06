@@ -7,6 +7,8 @@ type Workspace @model {
   managerID: ID!
   manager: User @connection(fields: ["managerID"])
 
+  projects: [Project] @connection(keyName: "byWorkspace", fields: ["id"])
+
   teamMembers: [WorkspaceMember]
     @connection(keyName: "byWorkspace", fields: ["id"])
 }
@@ -74,10 +76,12 @@ type Attachment @model @key(name: "byTask", fields: ["taskID"]) {
   comments: [Comment] @connection(keyName: "byAttachment", fields: ["id"])
 }
 
-type Project @model {
+type Project @model @key(name: "byWorkspace", fields: ["workspaceID"]) {
   id: ID!
   title: String!
   description: String
+
+  workspaceID: ID!
 
   managerID: ID!
   manager: User @connection(fields: ["managerID"])
