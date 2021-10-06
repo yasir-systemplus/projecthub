@@ -17,8 +17,24 @@ export const getWorkspace = /* GraphQL */ `
         workspaces {
           nextToken
         }
+        projects {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      projects {
+        items {
+          id
+          title
+          description
+          workspaceID
+          managerID
+          teamLeadID
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       teamMembers {
         items {
@@ -56,53 +72,10 @@ export const listWorkspaces = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        teamMembers {
+        projects {
           nextToken
         }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
+        teamMembers {
           nextToken
         }
         createdAt
@@ -120,6 +93,7 @@ export const getTask = /* GraphQL */ `
       priority
       description
       taskStatus
+      projectID
       creatorID
       creator {
         id
@@ -128,6 +102,9 @@ export const getTask = /* GraphQL */ `
         lastName
         userType
         workspaces {
+          nextToken
+        }
+        projects {
           nextToken
         }
         createdAt
@@ -141,6 +118,9 @@ export const getTask = /* GraphQL */ `
         lastName
         userType
         workspaces {
+          nextToken
+        }
+        projects {
           nextToken
         }
         createdAt
@@ -188,6 +168,7 @@ export const listTasks = /* GraphQL */ `
         priority
         description
         taskStatus
+        projectID
         creatorID
         creator {
           id
@@ -235,6 +216,9 @@ export const getComment = /* GraphQL */ `
         lastName
         userType
         workspaces {
+          nextToken
+        }
+        projects {
           nextToken
         }
         createdAt
@@ -331,6 +315,179 @@ export const listAttachments = /* GraphQL */ `
         url
         taskID
         comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getProject = /* GraphQL */ `
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
+      id
+      title
+      description
+      workspaceID
+      managerID
+      manager {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        workspaceID
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        projects {
           nextToken
         }
         createdAt

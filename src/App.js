@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 /**
  * Project Hub
  * Developed by Muhammad Yasir
@@ -9,30 +10,29 @@
 
 import React from 'react';
 import Screen from '../src/screens/Screen';
-import {TouchableWithoutFeedback, Text} from 'react-native';
-import Child from './components/Child';
+import AppButton from './components/AppButton';
+import AppForm from './components/AppForm';
+import AppInput from './components/AppInput';
+import {View, Text} from 'react-native';
 
-export default class App extends React.Component {
-  state = {
-    show: true,
+export default function App() {
+  const initial = {
+    tnc: true,
+    newsletter: false,
   };
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Screen>
-        {this.state.show && <Child />}
-
-        <TouchableWithoutFeedback
-          onPress={() => {
-            this.setState(!this.state.show);
-            console.log('object');
-          }}>
-          <Text>Destroy</Text>
-        </TouchableWithoutFeedback>
-      </Screen>
-    );
-  }
+  const validationSchema = () => {};
+  const onSubmit = data => {};
+  return (
+    <AppForm initialValues={initial} validationSchema={validationSchema}>
+      {({handleSubmit, handleBlur, handleChange, handleReset, errors}) => {
+        return (
+          <View>
+            <AppInput name="username" />
+            <AppInput name="password" />
+            <AppButton value="Submit" />
+          </View>
+        );
+      }}
+    </AppForm>
+  );
 }
