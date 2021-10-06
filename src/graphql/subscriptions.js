@@ -7,12 +7,13 @@ export const onCreateWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -40,12 +41,13 @@ export const onUpdateWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -73,12 +75,13 @@ export const onDeleteWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -109,12 +112,13 @@ export const onCreateWorkspaceMember = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -130,6 +134,7 @@ export const onCreateWorkspaceMember = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -150,12 +155,13 @@ export const onUpdateWorkspaceMember = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -171,6 +177,7 @@ export const onUpdateWorkspaceMember = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -191,12 +198,13 @@ export const onDeleteWorkspaceMember = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -212,6 +220,7 @@ export const onDeleteWorkspaceMember = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -230,6 +239,7 @@ export const onCreateUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
@@ -252,6 +262,7 @@ export const onUpdateUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
@@ -274,11 +285,393 @@ export const onDeleteUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
           workspaceID
           teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateTask = /* GraphQL */ `
+  subscription OnCreateTask {
+    onCreateTask {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateTask = /* GraphQL */ `
+  subscription OnUpdateTask {
+    onUpdateTask {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteTask = /* GraphQL */ `
+  subscription OnDeleteTask {
+    onDeleteTask {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateComment = /* GraphQL */ `
+  subscription OnCreateComment {
+    onCreateComment {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateComment = /* GraphQL */ `
+  subscription OnUpdateComment {
+    onUpdateComment {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteComment = /* GraphQL */ `
+  subscription OnDeleteComment {
+    onDeleteComment {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAttachment = /* GraphQL */ `
+  subscription OnCreateAttachment {
+    onCreateAttachment {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAttachment = /* GraphQL */ `
+  subscription OnUpdateAttachment {
+    onUpdateAttachment {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAttachment = /* GraphQL */ `
+  subscription OnDeleteAttachment {
+    onDeleteAttachment {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
           createdAt
           updatedAt
         }

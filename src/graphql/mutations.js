@@ -10,12 +10,13 @@ export const createWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -46,12 +47,13 @@ export const updateWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -82,12 +84,13 @@ export const deleteWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -121,12 +124,13 @@ export const createWorkspaceMember = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -142,6 +146,7 @@ export const createWorkspaceMember = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -165,12 +170,13 @@ export const updateWorkspaceMember = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -186,6 +192,7 @@ export const updateWorkspaceMember = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -209,12 +216,13 @@ export const deleteWorkspaceMember = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -230,6 +238,7 @@ export const deleteWorkspaceMember = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -251,6 +260,7 @@ export const createUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
@@ -276,6 +286,7 @@ export const updateUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
@@ -301,11 +312,420 @@ export const deleteUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
           workspaceID
           teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createTask = /* GraphQL */ `
+  mutation CreateTask(
+    $input: CreateTaskInput!
+    $condition: ModelTaskConditionInput
+  ) {
+    createTask(input: $input, condition: $condition) {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTask = /* GraphQL */ `
+  mutation UpdateTask(
+    $input: UpdateTaskInput!
+    $condition: ModelTaskConditionInput
+  ) {
+    updateTask(input: $input, condition: $condition) {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTask = /* GraphQL */ `
+  mutation DeleteTask(
+    $input: DeleteTaskInput!
+    $condition: ModelTaskConditionInput
+  ) {
+    deleteTask(input: $input, condition: $condition) {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createComment = /* GraphQL */ `
+  mutation CreateComment(
+    $input: CreateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    createComment(input: $input, condition: $condition) {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    updateComment(input: $input, condition: $condition) {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteComment = /* GraphQL */ `
+  mutation DeleteComment(
+    $input: DeleteCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    deleteComment(input: $input, condition: $condition) {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAttachment = /* GraphQL */ `
+  mutation CreateAttachment(
+    $input: CreateAttachmentInput!
+    $condition: ModelAttachmentConditionInput
+  ) {
+    createAttachment(input: $input, condition: $condition) {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAttachment = /* GraphQL */ `
+  mutation UpdateAttachment(
+    $input: UpdateAttachmentInput!
+    $condition: ModelAttachmentConditionInput
+  ) {
+    updateAttachment(input: $input, condition: $condition) {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAttachment = /* GraphQL */ `
+  mutation DeleteAttachment(
+    $input: DeleteAttachmentInput!
+    $condition: ModelAttachmentConditionInput
+  ) {
+    deleteAttachment(input: $input, condition: $condition) {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
           createdAt
           updatedAt
         }

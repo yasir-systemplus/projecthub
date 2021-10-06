@@ -7,12 +7,13 @@ export const getWorkspace = /* GraphQL */ `
       id
       title
       description
-      userID
-      createdBy {
+      managerID
+      manager {
         id
         email
         firstName
         lastName
+        userType
         workspaces {
           nextToken
         }
@@ -45,12 +46,13 @@ export const listWorkspaces = /* GraphQL */ `
         id
         title
         description
-        userID
-        createdBy {
+        managerID
+        manager {
           id
           email
           firstName
           lastName
+          userType
           createdAt
           updatedAt
         }
@@ -71,6 +73,7 @@ export const getUser = /* GraphQL */ `
       email
       firstName
       lastName
+      userType
       workspaces {
         items {
           id
@@ -98,7 +101,236 @@ export const listUsers = /* GraphQL */ `
         email
         firstName
         lastName
+        userType
         workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getTask = /* GraphQL */ `
+  query GetTask($id: ID!) {
+    getTask(id: $id) {
+      id
+      title
+      priority
+      description
+      taskStatus
+      creatorID
+      creator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      assigneeID
+      assignee {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      attachments {
+        items {
+          id
+          type
+          url
+          taskID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTasks = /* GraphQL */ `
+  query ListTasks(
+    $filter: ModelTaskFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        priority
+        description
+        taskStatus
+        creatorID
+        creator {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        assigneeID
+        assignee {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        attachments {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getComment = /* GraphQL */ `
+  query GetComment($id: ID!) {
+    getComment(id: $id) {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspaces {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listComments = /* GraphQL */ `
+  query ListComments(
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        description
+        taskID
+        commentatorID
+        commentator {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        commentedOnID
+        attachmentID
+        replies {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAttachment = /* GraphQL */ `
+  query GetAttachment($id: ID!) {
+    getAttachment(id: $id) {
+      id
+      type
+      url
+      taskID
+      comments {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAttachments = /* GraphQL */ `
+  query ListAttachments(
+    $filter: ModelAttachmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAttachments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        url
+        taskID
+        comments {
           nextToken
         }
         createdAt
