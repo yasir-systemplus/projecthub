@@ -1,20 +1,37 @@
 import React from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 
-export default function AppInput() {
+export default function AppInput({
+  name,
+  handleBlur,
+  handleChange,
+  error,
+  ...otherProps
+}) {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} />
+      <TextInput
+        onChangeText={handleChange(name)}
+        onBlur={handleBlur(name)}
+        style={styles.input}
+        {...otherProps}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 5,
+    backgroundColor: '#fafafa',
+    marginVertical: 5,
+    width: '100%',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#cbcbcb',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
   },
   input: {
-    borderWidth: 2,
-    borderRadius: 5,
+    fontSize: 16,
   },
 });
