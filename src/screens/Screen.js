@@ -8,5 +8,7 @@ export default function Screen({children}) {
 const styles = StyleSheet.create({
   container: {
     //paddingTop: StatusBar.currentHeight,
+    paddingHorizontal: 16,
+    flex: 1,
   },
 });

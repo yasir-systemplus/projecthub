@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
+import typograpy from '../config/typography';
 
 export default function AppInput({
   name,
@@ -32,6 +33,6 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   input: {
-    fontSize: 16,
+    ...typograpy.bodyLarge,
   },
 });
