@@ -1,12 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  text: {color: '#cbcbcb'},
-  large: {
-    color: '#000000',
-  },
-  medium: {},
-  small: {},
+  primary: '#931ee4',
+  darkGrey: '#707070',
+  lightGrey: '#cbcbcb',
+  black: '#000',
+  white: '#fff',
 });
 
 export default styles;
