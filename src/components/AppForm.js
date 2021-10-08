@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {Form, Formik} from 'formik';
+import {Formik} from 'formik';
+import ErrorMessage from './ErrorMessage';
 
 /**
  * AppForm
@@ -19,7 +19,14 @@ export default function AppForm({
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}>
-      {formProps => children(formProps)}
+      {({errors, ...all}) => {
+        return (
+          <>
+            {children({errors, ...all})}
+            {errors.general && <ErrorMessage error={errors.general} />}
+          </>
+        );
+      }}
     </Formik>
   );
 }

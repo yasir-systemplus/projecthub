@@ -2,21 +2,10 @@ import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import typograpy from '../config/typography';
 
-export default function AppInput({
-  name,
-  handleBlur,
-  handleChange,
-  error,
-  ...otherProps
-}) {
+export default function AppInput({...props}) {
   return (
     <View style={styles.container}>
-      <TextInput
-        onChangeText={handleChange(name)}
-        onBlur={handleBlur(name)}
-        style={styles.input}
-        {...otherProps}
-      />
+      <TextInput style={styles.input} {...props} />
     </View>
   );
 }
