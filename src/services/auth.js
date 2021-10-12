@@ -6,7 +6,7 @@ import {Auth} from 'aws-amplify';
  * @param {String} password Password
  * @returns Promise<CognitoUser | any>
  */
-export const login = (username, password) => {
+export const loginToAWS = (username, password) => {
   return Auth.signIn({username, password});
 };
 
@@ -21,4 +21,24 @@ export const completeNewPassword = (user, newPassword) => {
     //   phone_number: '1234567890',
     // },
   );
+};
+
+export const currentUser = () => {
+  return Auth.currentAuthenticatedUser();
+};
+
+export const forgotPassword = email => {
+  return Auth.forgotPassword(email);
+};
+
+export const forgotPasswordSubmit = (username, code, password) => {
+  return forgotPasswordSubmit(username, code, password);
+};
+
+export const AWSLogout = () => {
+  return Auth.signOut();
+};
+
+export const currentUserInfo = () => {
+  return Auth.currentUserInfo();
 };
