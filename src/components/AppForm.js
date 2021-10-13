@@ -13,16 +13,18 @@ export default function AppForm({
   initialValues,
   onSubmit,
   validationSchema,
+  ...otherProps
 }) {
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
-      validationSchema={validationSchema}>
-      {({errors, ...all}) => {
+      validationSchema={validationSchema}
+      {...otherProps}>
+      {({errors, touched, ...props}) => {
         return (
           <>
-            {children({errors, ...all})}
+            {children({errors, touched, ...props})}
             {errors.general && <ErrorMessage error={errors.general} />}
           </>
         );

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import colors from './colors';
-const styles = StyleSheet.create({
+const typography = StyleSheet.create({
   bodySmall: {
     fontSize: 14,
     ...colors.darkGrey,
@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.darkGrey,
   },
+  heading4: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.black,
+  },
+
   heading5: {
     fontSize: 24,
     color: colors.black,
@@ -21,6 +27,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.lightGrey,
   },
+
+  workplacePickerHeading: {
+    fontSize: 20,
+    color: colors.black,
+    fontWeight: 'bold',
+  },
+  workplacePickerSubtitle: {
+    fontSize: 16,
+    color: colors.darkGrey,
+  },
 });
 
-export default styles;
+export default typography;

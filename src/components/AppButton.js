@@ -1,7 +1,13 @@
 import React from 'react';
-import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 
-export default function AppButton({value, type, onPress}) {
+export default function AppButton({value, type, style, loading, onPress}) {
   let dynamicBg = '#8734dc';
   let dynamicText = '#ffff';
   let dynamicBorder = 10;
@@ -17,13 +23,17 @@ export default function AppButton({value, type, onPress}) {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={onPress} disabled={loading}>
       <View
         style={[
           styles.button,
           {backgroundColor: dynamicBg, borderRadius: dynamicBorder},
+          style,
         ]}>
-        <Text style={[styles.text, {color: dynamicText}]}>{value}</Text>
+        <Text style={[styles.text, {color: dynamicText}]}>
+          {loading && <ActivityIndicator />}
+          {!loading && value}
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );

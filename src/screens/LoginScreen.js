@@ -1,33 +1,42 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import Screen from './Screen';
 import FormField from '../components/FormField';
 import AppForm from '../components/AppForm';
-import {login} from '../services/auth';
+import {currentUserInfo} from '../services/auth';
 import {LoginButton} from '../components/LoginButton';
 import Logo from '../assets/images/logo.svg';
 import AppButton from '../components/AppButton';
 import * as Yup from 'yup';
-import NewPasswordChallenge from '../components/NewPasswordChallenge';
+import {completeNewPassword} from '../services/auth';
+import colors from '../config/colors';
+import typography from '../config/typography';
+import routes from '../navigation/routes';
+import useAuth from '../hooks/useAuth';
 
-export default function LoginScreen() {
-  const [challenge, setChallenge] = useState(false);
+export default function LoginScreen({navigation}) {
+  const {user, login} = useAuth();
+
+  if (user) {
+    navigation.navigate(routes.DASHBOARD);
+  }
 
   const onSubmit = async (data, {setErrors}) => {
     try {
-      const user = await login(data.username, data.password);
-      console.log(user);
-      if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        setChallenge(true);
-        // completeNewPassword(user, '23e1dwqsxas')
-        //   .then(user => {
-        //     console.log(user);
-        //   })
-        //   .catch(er => {
-        //     console.log(er);
-        //   });
-      } else {
-        // other situations
+      const authenticatedUser = await login(data.username, data.password);
+
+      if (authenticatedUser?.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        completeNewPassword(user, data.password)
+          .then(updated => {
+            console.log('User Updates', updated);
+          })
+          .catch(er => {
+            console.log(er.message);
+          });
+      }
+
+      if (authenticatedUser) {
+        navigation.navigate(routes.DASHBOARD);
       }
     } catch (e) {
       switch (e.message) {
@@ -57,14 +66,10 @@ export default function LoginScreen() {
       .email('Enter valid email.')
       .required('Username is required.'),
     password: Yup.string()
-      .min(2, 'Password is too short.')
+      .min(8, 'Password must be greater than 8 characters.')
       .max(16, 'Password must be less than 16 characters.')
       .required('Password is required.'),
   });
-
-  const handleNewPassword = pass => {
-    console.log(pass);
-  };
 
   return (
     <Screen>
@@ -84,10 +89,8 @@ export default function LoginScreen() {
       </View>
       <View style={{flex: 1}}>
         <View style={styles.heading}>
-          <Text style={{fontSize: 36, fontWeight: 'bold'}}>
-            You were missed
-          </Text>
-          <Text style={{fontSize: 16}}>
+          <Text style={styles.headingText}>You were missed</Text>
+          <Text style={typography.subTitle}>
             Enter details to login into your account
           </Text>
         </View>
@@ -101,10 +104,16 @@ export default function LoginScreen() {
           {() => {
             return (
               <View style={{alignItems: 'center'}}>
-                <FormField name="username" />
-                <FormField name="password" secureTextEntry={true} />
+                <FormField name="username" placeholder="Email" />
+                <FormField
+                  name="password"
+                  placeholder="Password"
+                  secureTextEntry={true}
+                />
                 <AppButton
-                  onPress={() => setChallenge(true)}
+                  onPress={() => {
+                    navigation.navigate(routes.FORGOT_PASSWORD);
+                  }}
                   value="Forgot Password"
                   type="tertiary"
                 />
@@ -114,13 +123,6 @@ export default function LoginScreen() {
           }}
         </AppForm>
       </View>
-      {challenge && (
-        <NewPasswordChallenge
-          onFinishEditing={data => console.log(data)}
-          onRequestClose={() => setChallenge(false)}
-          onSubmit={handleNewPassword}
-        />
-      )}
     </Screen>
   );
 }
@@ -141,4 +143,6 @@ const styles = StyleSheet.create({
     marginTop: -20,
     marginBottom: 10,
   },
+  headingText: {fontSize: 36, fontWeight: 'bold', color: colors.black},
+  subTitle: {fontSize: 16},
 });
