@@ -23,7 +23,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName={routes.LOGIN}>
         <Stack.Screen name={routes.AUTH} component={AuthNavigator} />
-        <Stack.Screen name={routes.DASHBOARD} component={DashboardNavigator} />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name={routes.DASHBOARD}
+          component={DashboardNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
