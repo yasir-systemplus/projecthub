@@ -1,11 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 
-export default function RoundButton() {
+export default function RoundButton({
+  component: Icon,
+  size = 20,
+  color = 'black',
+  name,
+  onPress,
+}) {
   return (
-    <View style={styles.btn}>
-      <Text>Hi</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.btn}>
+        <Icon size={size} color={color} name={name} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -13,6 +21,6 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: 'white',
     borderRadius: 50,
-    padding: 5,
+    padding: 10,
   },
 });

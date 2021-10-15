@@ -2,11 +2,11 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Profile from './Profile';
 
-export default function Profiles({profiles}) {
+export default function Profiles({profiles, size}) {
   return (
     <View style={styles.container}>
       {profiles.map((p, i) => (
-        <Profile key={p.id} index={i} image={p.image} />
+        <Profile key={p.id} index={i} image={p.image} size={size} />
       ))}
     </View>
   );

@@ -8,6 +8,7 @@ const colors = StyleSheet.create({
   white: '#fff',
   gradient1: '#8404E2',
   gradient2: '#E493EF',
+  heading: '#3e405c',
 });
 
 export default colors;

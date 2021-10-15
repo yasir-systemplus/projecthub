@@ -6,6 +6,7 @@ const routes = Object.freeze({
   DASHBOARD: 'DASHBOARD',
   AUTH: 'AUTH',
   PROJECT: 'PROJECT',
+  TASK: 'TASK',
 });
 
 export default routes;
