@@ -3,9 +3,9 @@ import {View, Image, StyleSheet, Text} from 'react-native';
 import colors from '../config/colors';
 import AppText from './AppText';
 
-export default function Comment({comment}) {
+export default function Comment({comment, style = {}}) {
   return (
-    <View style={styles.contaner}>
+    <View style={[styles.contaner, style]}>
       <Image
         width={50}
         height={50}
@@ -16,7 +16,9 @@ export default function Comment({comment}) {
         <AppText style={{color: colors.heading, fontWeight: 'bold'}}>
           {comment.commentor}
         </AppText>
-        <Text>{comment.message}</Text>
+        <AppText style={{paddingRight: 65, color: colors.darkGrey}}>
+          {comment.message}
+        </AppText>
       </View>
     </View>
   );
@@ -25,7 +27,7 @@ export default function Comment({comment}) {
 const styles = StyleSheet.create({
   contaner: {
     flexDirection: 'row',
-    marginBottom: 10,
+    paddingHorizontal: 16,
   },
   image: {
     borderRadius: 50,
