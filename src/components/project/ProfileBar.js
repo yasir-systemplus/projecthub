@@ -2,10 +2,6 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Profiles from '../Profiles';
 import colors from '../../config/colors';
-import MenuDots from './MenuDots';
-import AppText from '../AppText';
-import typography from '../../config/typography';
-
 export default function ProfileBar({profiles}) {
   return (
     <View style={styles.container}>

@@ -1,8 +1,12 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-export default function ProjectBodyPan({children}) {
-  return <View style={styles.container}>{children}</View>;
+export default function ProjectBodyPan({children, ...otherProps}) {
+  return (
+    <View style={[styles.container]} {...otherProps}>
+      {children}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

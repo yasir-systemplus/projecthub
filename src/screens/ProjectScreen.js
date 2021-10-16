@@ -10,6 +10,8 @@ import ProfileBar from '../components/project/ProfileBar';
 import MenuDots from '../components/project/MenuDots';
 import FilterTasks from '../components/project/FilterProjects';
 import TaskCard from '../components/project/TaskCard';
+import routes from '../navigation/routes';
+import {useNavigation} from '@react-navigation/core';
 
 const profiles = [
   {id: 1, image: 'https://picsum.photos/200'},
@@ -42,6 +44,7 @@ const tasks = [
 ];
 export default function ProjectScreen() {
   const [filter, setFilter] = useState(false);
+  const {navigate} = useNavigation();
   return (
     <ScrollView>
       <CurvedPanHeader />
@@ -71,7 +74,11 @@ export default function ProjectScreen() {
           onClose={() => setFilter(prev => !prev)}
         />
         {tasks.map(item => (
-          <TaskCard key={item.id} item={item} />
+          <TaskCard
+            key={item.id}
+            item={item}
+            onPress={() => navigate(routes.TASK)}
+          />
         ))}
       </CurvedBodyPan>
     </ScrollView>

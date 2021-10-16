@@ -4,10 +4,15 @@ import AppText from './AppText';
 import RoundButton from './RoundButton';
 import Icon from 'react-native-vector-icons/Entypo';
 
-export default function CurvedPanHeader() {
+export default function CurvedPanHeader({onBack, ...otherProps}) {
   return (
-    <View style={styles.container}>
-      <RoundButton component={Icon} color={'#3e405c'} name="chevron-left" />
+    <View style={styles.container} {...otherProps}>
+      <RoundButton
+        onPress={onBack}
+        component={Icon}
+        color={'#3e405c'}
+        name="chevron-left"
+      />
       <AppText>In - Progress</AppText>
       <RoundButton
         component={Icon}
