@@ -44,7 +44,7 @@ export default function Project({title, completed, pending}) {
         width={null}
         animationType="timing"
       />
-      <Profiles profiles={profiles} />
+      <Profiles profiles={profiles} size={25} />
     </Card>
   );
 }

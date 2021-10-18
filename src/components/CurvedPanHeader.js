@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import AppText from './AppText';
 import RoundButton from './RoundButton';
 import Icon from 'react-native-vector-icons/Entypo';
+import {useNavigation} from '@react-navigation/core';
 
 export default function CurvedPanHeader({onBack, ...otherProps}) {
   return (
