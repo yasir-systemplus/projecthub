@@ -56,7 +56,7 @@ export default function useAuth() {
                 },
               });
             } catch (error) {
-              console.log('updating db user');
+              console.log('Error on updating db user');
             }
           } else {
             try {
@@ -75,10 +75,9 @@ export default function useAuth() {
                 },
               });
             } catch (error) {
-              console.log('creating db user', error);
+              console.log('error on creating db user', error);
             }
           }
-          console.log('DB User', dbUser);
         } catch (error) {
           console.log('error from db');
         }
