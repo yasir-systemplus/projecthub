@@ -10,7 +10,7 @@ export default function PickerItem({item: workplace, onPress}) {
         <PickerImage image={workplace.image} onPress={onPress} />
         <View style={styles.text}>
           <AppText style={typography.workplacePickerHeading}>
-            {workplace.name}
+            {workplace.title}
           </AppText>
           <AppText style={typography.workplacePickerSubtitle}>
             23 tasks assigned

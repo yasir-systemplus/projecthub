@@ -9,7 +9,6 @@ import AppText from '../components/AppText';
 import typography from '../config/typography';
 
 export default function Dashboard({navigation}) {
-  const {user} = useAuth();
   return (
     <Screen>
       <DashboardHeader />

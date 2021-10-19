@@ -6,7 +6,7 @@ import colors from '../../config/colors';
 export default function PickerImage({image, onPress, ...otherProps}) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <FastImage style={styles.box} source={image} {...otherProps} />
+      <FastImage style={styles.box} source={{uri: image}} {...otherProps} />
     </TouchableOpacity>
   );
 }
