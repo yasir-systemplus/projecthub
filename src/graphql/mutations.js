@@ -17,6 +17,9 @@ export const createWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -32,7 +35,6 @@ export const createWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
-          managerID
           teamLeadID
           createdAt
           updatedAt
@@ -70,6 +72,9 @@ export const updateWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -85,7 +90,6 @@ export const updateWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
-          managerID
           teamLeadID
           createdAt
           updatedAt
@@ -123,6 +127,9 @@ export const deleteWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -138,7 +145,6 @@ export const deleteWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
-          managerID
           teamLeadID
           createdAt
           updatedAt
@@ -149,6 +155,393 @@ export const deleteWorkspace = /* GraphQL */ `
         items {
           id
           workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspacesBeingManaged {
+        items {
+          id
+          title
+          description
+          managerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspacesBeingManaged {
+        items {
+          id
+          title
+          description
+          managerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspacesBeingManaged {
+        items {
+          id
+          title
+          description
+          managerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createProject = /* GraphQL */ `
+  mutation CreateProject(
+    $input: CreateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    createProject(input: $input, condition: $condition) {
+      id
+      title
+      description
+      workspaceID
+      workspace {
+        id
+        title
+        description
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        projects {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProject = /* GraphQL */ `
+  mutation UpdateProject(
+    $input: UpdateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    updateProject(input: $input, condition: $condition) {
+      id
+      title
+      description
+      workspaceID
+      workspace {
+        id
+        title
+        description
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        projects {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProject = /* GraphQL */ `
+  mutation DeleteProject(
+    $input: DeleteProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    deleteProject(input: $input, condition: $condition) {
+      id
+      title
+      description
+      workspaceID
+      workspace {
+        id
+        title
+        description
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        projects {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
           teamMemberID
           createdAt
           updatedAt
@@ -198,6 +591,9 @@ export const createWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -250,6 +646,9 @@ export const updateWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -302,6 +701,9 @@ export const deleteWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -335,6 +737,9 @@ export const createTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -351,6 +756,9 @@ export const createTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -408,6 +816,9 @@ export const updateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -424,6 +835,9 @@ export const updateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -481,6 +895,9 @@ export const deleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -497,6 +914,9 @@ export const deleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -551,6 +971,9 @@ export const createComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -596,6 +1019,9 @@ export const updateComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -641,6 +1067,9 @@ export const deleteComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -754,330 +1183,6 @@ export const deleteAttachment = /* GraphQL */ `
     }
   }
 `;
-export const createProject = /* GraphQL */ `
-  mutation CreateProject(
-    $input: CreateProjectInput!
-    $condition: ModelProjectConditionInput
-  ) {
-    createProject(input: $input, condition: $condition) {
-      id
-      title
-      description
-      workspaceID
-      managerID
-      manager {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamLeadID
-      teamLead {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      tasks {
-        items {
-          id
-          title
-          priority
-          description
-          taskStatus
-          projectID
-          creatorID
-          assigneeID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      teamMembers {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateProject = /* GraphQL */ `
-  mutation UpdateProject(
-    $input: UpdateProjectInput!
-    $condition: ModelProjectConditionInput
-  ) {
-    updateProject(input: $input, condition: $condition) {
-      id
-      title
-      description
-      workspaceID
-      managerID
-      manager {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamLeadID
-      teamLead {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      tasks {
-        items {
-          id
-          title
-          priority
-          description
-          taskStatus
-          projectID
-          creatorID
-          assigneeID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      teamMembers {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteProject = /* GraphQL */ `
-  mutation DeleteProject(
-    $input: DeleteProjectInput!
-    $condition: ModelProjectConditionInput
-  ) {
-    deleteProject(input: $input, condition: $condition) {
-      id
-      title
-      description
-      workspaceID
-      managerID
-      manager {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamLeadID
-      teamLead {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      tasks {
-        items {
-          id
-          title
-          priority
-          description
-          taskStatus
-          projectID
-          creatorID
-          assigneeID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      teamMembers {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      projects {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      projects {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    deleteUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      projects {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createProjectMember = /* GraphQL */ `
   mutation CreateProjectMember(
     $input: CreateProjectMemberInput!
@@ -1091,13 +1196,11 @@ export const createProjectMember = /* GraphQL */ `
         title
         description
         workspaceID
-        managerID
-        manager {
+        workspace {
           id
-          email
-          firstName
-          lastName
-          userType
+          title
+          description
+          managerID
           createdAt
           updatedAt
         }
@@ -1127,6 +1230,9 @@ export const createProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -1154,13 +1260,11 @@ export const updateProjectMember = /* GraphQL */ `
         title
         description
         workspaceID
-        managerID
-        manager {
+        workspace {
           id
-          email
-          firstName
-          lastName
-          userType
+          title
+          description
+          managerID
           createdAt
           updatedAt
         }
@@ -1190,6 +1294,9 @@ export const updateProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -1217,13 +1324,11 @@ export const deleteProjectMember = /* GraphQL */ `
         title
         description
         workspaceID
-        managerID
-        manager {
+        workspace {
           id
-          email
-          firstName
-          lastName
-          userType
+          title
+          description
+          managerID
           createdAt
           updatedAt
         }
@@ -1253,6 +1358,9 @@ export const deleteProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }

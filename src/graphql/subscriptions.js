@@ -14,6 +14,9 @@ export const onCreateWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -29,7 +32,6 @@ export const onCreateWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
-          managerID
           teamLeadID
           createdAt
           updatedAt
@@ -64,6 +66,9 @@ export const onUpdateWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -79,7 +84,6 @@ export const onUpdateWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
-          managerID
           teamLeadID
           createdAt
           updatedAt
@@ -114,6 +118,9 @@ export const onDeleteWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -129,7 +136,6 @@ export const onDeleteWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
-          managerID
           teamLeadID
           createdAt
           updatedAt
@@ -140,6 +146,375 @@ export const onDeleteWorkspace = /* GraphQL */ `
         items {
           id
           workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspacesBeingManaged {
+        items {
+          id
+          title
+          description
+          managerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspacesBeingManaged {
+        items {
+          id
+          title
+          description
+          managerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      email
+      firstName
+      lastName
+      userType
+      workspacesBeingManaged {
+        items {
+          id
+          title
+          description
+          managerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateProject = /* GraphQL */ `
+  subscription OnCreateProject {
+    onCreateProject {
+      id
+      title
+      description
+      workspaceID
+      workspace {
+        id
+        title
+        description
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        projects {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProject = /* GraphQL */ `
+  subscription OnUpdateProject {
+    onUpdateProject {
+      id
+      title
+      description
+      workspaceID
+      workspace {
+        id
+        title
+        description
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        projects {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProject = /* GraphQL */ `
+  subscription OnDeleteProject {
+    onDeleteProject {
+      id
+      title
+      description
+      workspaceID
+      workspace {
+        id
+        title
+        description
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          createdAt
+          updatedAt
+        }
+        projects {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
           teamMemberID
           createdAt
           updatedAt
@@ -186,6 +561,9 @@ export const onCreateWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -235,6 +613,9 @@ export const onUpdateWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -284,6 +665,9 @@ export const onDeleteWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -314,6 +698,9 @@ export const onCreateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -330,6 +717,9 @@ export const onCreateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -384,6 +774,9 @@ export const onUpdateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -400,6 +793,9 @@ export const onUpdateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -454,6 +850,9 @@ export const onDeleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -470,6 +869,9 @@ export const onDeleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -521,6 +923,9 @@ export const onCreateComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -563,6 +968,9 @@ export const onUpdateComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -605,6 +1013,9 @@ export const onDeleteComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -709,312 +1120,6 @@ export const onDeleteAttachment = /* GraphQL */ `
     }
   }
 `;
-export const onCreateProject = /* GraphQL */ `
-  subscription OnCreateProject {
-    onCreateProject {
-      id
-      title
-      description
-      workspaceID
-      managerID
-      manager {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamLeadID
-      teamLead {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      tasks {
-        items {
-          id
-          title
-          priority
-          description
-          taskStatus
-          projectID
-          creatorID
-          assigneeID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      teamMembers {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateProject = /* GraphQL */ `
-  subscription OnUpdateProject {
-    onUpdateProject {
-      id
-      title
-      description
-      workspaceID
-      managerID
-      manager {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamLeadID
-      teamLead {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      tasks {
-        items {
-          id
-          title
-          priority
-          description
-          taskStatus
-          projectID
-          creatorID
-          assigneeID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      teamMembers {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteProject = /* GraphQL */ `
-  subscription OnDeleteProject {
-    onDeleteProject {
-      id
-      title
-      description
-      workspaceID
-      managerID
-      manager {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamLeadID
-      teamLead {
-        id
-        email
-        firstName
-        lastName
-        userType
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      tasks {
-        items {
-          id
-          title
-          priority
-          description
-          taskStatus
-          projectID
-          creatorID
-          assigneeID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      teamMembers {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      projects {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      projects {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
-      id
-      email
-      firstName
-      lastName
-      userType
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      projects {
-        items {
-          id
-          projectID
-          teamMemberID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateProjectMember = /* GraphQL */ `
   subscription OnCreateProjectMember {
     onCreateProjectMember {
@@ -1025,13 +1130,11 @@ export const onCreateProjectMember = /* GraphQL */ `
         title
         description
         workspaceID
-        managerID
-        manager {
+        workspace {
           id
-          email
-          firstName
-          lastName
-          userType
+          title
+          description
+          managerID
           createdAt
           updatedAt
         }
@@ -1061,6 +1164,9 @@ export const onCreateProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -1085,13 +1191,11 @@ export const onUpdateProjectMember = /* GraphQL */ `
         title
         description
         workspaceID
-        managerID
-        manager {
+        workspace {
           id
-          email
-          firstName
-          lastName
-          userType
+          title
+          description
+          managerID
           createdAt
           updatedAt
         }
@@ -1121,6 +1225,9 @@ export const onUpdateProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
@@ -1145,13 +1252,11 @@ export const onDeleteProjectMember = /* GraphQL */ `
         title
         description
         workspaceID
-        managerID
-        manager {
+        workspace {
           id
-          email
-          firstName
-          lastName
-          userType
+          title
+          description
+          managerID
           createdAt
           updatedAt
         }
@@ -1181,6 +1286,9 @@ export const onDeleteProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
