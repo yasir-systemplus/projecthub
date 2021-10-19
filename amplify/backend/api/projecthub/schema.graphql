@@ -107,6 +107,40 @@ type Attachment @model @key(name: "byTask", fields: ["taskID"]) {
   comments: [Comment] @connection(keyName: "byAttachment", fields: ["id"])
 }
 
+type Project @model @key(name: "byWorkspace", fields: ["workspaceID"]) {
+  id: ID!
+  title: String!
+  description: String
+
+  workspaceID: ID!
+
+  managerID: ID!
+  manager: User @connection(fields: ["managerID"])
+
+  teamLeadID: ID!
+  teamLead: User @connection(fields: ["teamLeadID"])
+
+  tasks: [Task] @connection(keyName: "byProject", fields: ["id"])
+  teamMembers: [ProjectMember] @connection(keyName: "byProject", fields: ["id"])
+}
+
+# Reviewed
+type User @model {
+  id: ID!
+  email: AWSEmail!
+  firstName: String
+  lastName: String
+  userType: String!
+  emailVerfied: Boolean
+  phoneNumber: String
+  phoneNumberVerified: Boolean
+
+  workspaces: [WorkspaceMember]
+    @connection(keyName: "byTeamMember", fields: ["id"])
+
+  projects: [ProjectMember] @connection(keyName: "byTeamMember", fields: ["id"])
+}
+
 type ProjectMember
   @model(queries: null)
   @key(name: "byProject", fields: ["projectID", "teamMemberID"])

@@ -1,9 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import Screen from './Screen';
 import FormField from '../components/FormField';
 import AppForm from '../components/AppForm';
-import {currentUserInfo} from '../services/auth';
 import {LoginButton} from '../components/LoginButton';
 import Logo from '../assets/images/logo.svg';
 import AppButton from '../components/AppButton';
@@ -25,18 +24,21 @@ export default function LoginScreen({navigation}) {
     try {
       const authenticatedUser = await login(data.username, data.password);
 
-      if (authenticatedUser?.challengeName === 'NEW_PASSWORD_REQUIRED') {
-        completeNewPassword(user, data.password)
+      if (
+        authenticatedUser.challengeName &&
+        authenticatedUser.challengeName === 'NEW_PASSWORD_REQUIRED'
+      ) {
+        completeNewPassword(authenticatedUser, data.password)
           .then(updated => {
             console.log('User Updates', updated);
+
+            if (authenticatedUser) {
+              navigation.navigate(routes.DASHBOARD);
+            }
           })
           .catch(er => {
-            console.log(er.message);
+            console.log('Updating Password', er.message);
           });
-      }
-
-      if (authenticatedUser) {
-        navigation.navigate(routes.DASHBOARD);
       }
     } catch (e) {
       switch (e.message) {

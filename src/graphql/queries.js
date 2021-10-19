@@ -14,9 +14,9 @@ export const getWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -71,6 +71,9 @@ export const listWorkspaces = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -298,9 +301,9 @@ export const getTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -317,9 +320,9 @@ export const getTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -379,6 +382,9 @@ export const listTasks = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -389,6 +395,9 @@ export const listTasks = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -418,9 +427,9 @@ export const getComment = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -468,6 +477,9 @@ export const listComments = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -521,6 +533,197 @@ export const listAttachments = /* GraphQL */ `
         url
         taskID
         comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getProject = /* GraphQL */ `
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
+      id
+      title
+      description
+      workspaceID
+      managerID
+      manager {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
+          nextToken
+        }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      tasks {
+        items {
+          id
+          title
+          priority
+          description
+          taskStatus
+          projectID
+          creatorID
+          assigneeID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      teamMembers {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        workspaceID
+        managerID
+        manager {
+          id
+          email
+          firstName
+          lastName
+          userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          id
+          email
+          firstName
+          lastName
+          userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        teamMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      email
+      firstName
+      lastName
+      userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
+        items {
+          id
+          projectID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
+          nextToken
+        }
+        projects {
           nextToken
         }
         createdAt

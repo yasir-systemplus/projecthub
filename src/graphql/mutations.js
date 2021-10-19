@@ -17,9 +17,9 @@ export const createWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -72,9 +72,9 @@ export const updateWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -127,9 +127,9 @@ export const deleteWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -328,6 +328,9 @@ export const createProject = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -347,9 +350,9 @@ export const createProject = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -410,6 +413,9 @@ export const updateProject = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -429,9 +435,9 @@ export const updateProject = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -492,6 +498,9 @@ export const deleteProject = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -511,9 +520,9 @@ export const deleteProject = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -591,9 +600,9 @@ export const createWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -646,9 +655,9 @@ export const updateWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -737,9 +746,9 @@ export const createTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -756,9 +765,9 @@ export const createTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -816,9 +825,9 @@ export const updateTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -835,9 +844,9 @@ export const updateTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -895,9 +904,57 @@ export const deleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
           nextToken
         }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      commentedOnID
+      attachmentID
+      replies {
+        items {
+          id
+          description
+          taskID
+          commentatorID
+          commentedOnID
+          attachmentID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    updateComment(input: $input, condition: $condition) {
+      id
+      description
+      taskID
+      commentatorID
+      commentator {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -914,9 +971,9 @@ export const deleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -971,9 +1028,28 @@ export const createComment = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
           nextToken
         }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1019,9 +1095,28 @@ export const updateComment = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
           nextToken
         }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1067,9 +1162,28 @@ export const deleteComment = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
+        workspaces {
           nextToken
         }
+        projects {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      teamLeadID
+      teamLead {
+        id
+        email
+        firstName
+        lastName
+        userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1106,10 +1220,24 @@ export const createAttachment = /* GraphQL */ `
   ) {
     createAttachment(input: $input, condition: $condition) {
       id
-      type
-      url
-      taskID
-      comments {
+      email
+      firstName
+      lastName
+      userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
         items {
           id
           description
@@ -1134,10 +1262,24 @@ export const updateAttachment = /* GraphQL */ `
   ) {
     updateAttachment(input: $input, condition: $condition) {
       id
-      type
-      url
-      taskID
-      comments {
+      email
+      firstName
+      lastName
+      userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
         items {
           id
           description
@@ -1162,10 +1304,24 @@ export const deleteAttachment = /* GraphQL */ `
   ) {
     deleteAttachment(input: $input, condition: $condition) {
       id
-      type
-      url
-      taskID
-      comments {
+      email
+      firstName
+      lastName
+      userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
+      workspaces {
+        items {
+          id
+          workspaceID
+          teamMemberID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      projects {
         items {
           id
           description
@@ -1198,9 +1354,13 @@ export const createProjectMember = /* GraphQL */ `
         workspaceID
         workspace {
           id
-          title
-          description
-          managerID
+          email
+          firstName
+          lastName
+          userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1211,6 +1371,9 @@ export const createProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1230,9 +1393,9 @@ export const createProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1262,9 +1425,13 @@ export const updateProjectMember = /* GraphQL */ `
         workspaceID
         workspace {
           id
-          title
-          description
-          managerID
+          email
+          firstName
+          lastName
+          userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1275,6 +1442,9 @@ export const updateProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1294,9 +1464,9 @@ export const updateProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1326,9 +1496,13 @@ export const deleteProjectMember = /* GraphQL */ `
         workspaceID
         workspace {
           id
-          title
-          description
-          managerID
+          email
+          firstName
+          lastName
+          userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1339,6 +1513,9 @@ export const deleteProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1358,9 +1535,9 @@ export const deleteProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
-        workspacesBeingManaged {
-          nextToken
-        }
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
