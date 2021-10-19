@@ -100,6 +100,9 @@ type User @model {
   firstName: String
   lastName: String
   userType: String!
+  emailVerfied: Boolean
+  phoneNumber: String
+  phoneNumberVerified: Boolean
 
   workspaces: [WorkspaceMember]
     @connection(keyName: "byTeamMember", fields: ["id"])

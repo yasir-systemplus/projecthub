@@ -14,6 +14,9 @@ export const getWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -69,6 +72,9 @@ export const listWorkspaces = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -101,6 +107,9 @@ export const getTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -117,6 +126,9 @@ export const getTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -176,6 +188,9 @@ export const listTasks = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -186,6 +201,9 @@ export const listTasks = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -215,6 +233,9 @@ export const getComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -262,6 +283,9 @@ export const listComments = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -338,6 +362,9 @@ export const getProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -354,6 +381,9 @@ export const getProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -412,6 +442,9 @@ export const listProjects = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -422,6 +455,9 @@ export const listProjects = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -446,6 +482,9 @@ export const getUser = /* GraphQL */ `
       firstName
       lastName
       userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
       workspaces {
         items {
           id
@@ -484,6 +523,9 @@ export const listUsers = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }

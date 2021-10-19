@@ -17,6 +17,9 @@ export const createWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -70,6 +73,9 @@ export const updateWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -123,6 +129,9 @@ export const deleteWorkspace = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -179,6 +188,9 @@ export const createWorkspaceMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -198,6 +210,9 @@ export const createWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -231,6 +246,9 @@ export const updateWorkspaceMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -250,6 +268,9 @@ export const updateWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -283,6 +304,9 @@ export const deleteWorkspaceMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -302,6 +326,9 @@ export const deleteWorkspaceMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -335,6 +362,9 @@ export const createTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -351,6 +381,9 @@ export const createTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -408,6 +441,9 @@ export const updateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -424,6 +460,9 @@ export const updateTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -481,6 +520,9 @@ export const deleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -497,6 +539,9 @@ export const deleteTask = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -551,6 +596,9 @@ export const createComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -596,6 +644,9 @@ export const updateComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -641,6 +692,9 @@ export const deleteComment = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -771,6 +825,9 @@ export const createProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -787,6 +844,9 @@ export const createProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -843,6 +903,9 @@ export const updateProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -859,6 +922,9 @@ export const updateProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -915,6 +981,9 @@ export const deleteProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -931,6 +1000,9 @@ export const deleteProject = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -981,6 +1053,9 @@ export const createUser = /* GraphQL */ `
       firstName
       lastName
       userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
       workspaces {
         items {
           id
@@ -1017,6 +1092,9 @@ export const updateUser = /* GraphQL */ `
       firstName
       lastName
       userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
       workspaces {
         items {
           id
@@ -1053,6 +1131,9 @@ export const deleteUser = /* GraphQL */ `
       firstName
       lastName
       userType
+      emailVerfied
+      phoneNumber
+      phoneNumberVerified
       workspaces {
         items {
           id
@@ -1098,6 +1179,9 @@ export const createProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1108,6 +1192,9 @@ export const createProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1127,6 +1214,9 @@ export const createProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1161,6 +1251,9 @@ export const updateProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1171,6 +1264,9 @@ export const updateProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1190,6 +1286,9 @@ export const updateProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
@@ -1224,6 +1323,9 @@ export const deleteProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1234,6 +1336,9 @@ export const deleteProjectMember = /* GraphQL */ `
           firstName
           lastName
           userType
+          emailVerfied
+          phoneNumber
+          phoneNumberVerified
           createdAt
           updatedAt
         }
@@ -1253,6 +1358,9 @@ export const deleteProjectMember = /* GraphQL */ `
         firstName
         lastName
         userType
+        emailVerfied
+        phoneNumber
+        phoneNumberVerified
         workspaces {
           nextToken
         }
