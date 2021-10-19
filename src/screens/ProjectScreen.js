@@ -12,6 +12,8 @@ import FilterTasks from '../components/project/FilterProjects';
 import TaskCard from '../components/project/TaskCard';
 import routes from '../navigation/routes';
 import {useNavigation} from '@react-navigation/core';
+import AppButton from '../components/AppButton';
+import useAuth from '../hooks/useAuth';
 
 const profiles = [
   {id: 1, image: 'https://picsum.photos/200'},
@@ -44,10 +46,12 @@ const tasks = [
 ];
 export default function ProjectScreen() {
   const [filter, setFilter] = useState(false);
-  const {navigate} = useNavigation();
+  const {goBack, navigate} = useNavigation();
+  const {logout} = useAuth();
+
   return (
     <ScrollView>
-      <CurvedPanHeader />
+      <CurvedPanHeader onBack={goBack} />
       <CurvedBodyPan>
         <AppText style={[typography.heading4, styles.title]}>
           Alo Pakory Banne hen, Workshop aur Hackathon
@@ -59,6 +63,14 @@ export default function ProjectScreen() {
           ab illowe3 inventore veritatis et quasi architecto beatae vitae dicta
           sunt explicabo.
         </AppText>
+        <AppButton
+          onPress={() => {
+            console.log('object');
+            logout();
+            navigate(routes.LOGIN);
+          }}
+          value="Logout"
+        />
         <DeadlineWithProgress />
         <Separator />
         <AppText style={typography.heading4}>Assigned To</AppText>

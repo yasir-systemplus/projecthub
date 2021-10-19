@@ -12,7 +12,7 @@ export default function Dashboard({navigation}) {
   const {user} = useAuth();
   return (
     <Screen>
-      <DashboardHeader user={user} />
+      <DashboardHeader />
       <FeatureCard />
       <AppText style={styles.heading}>My Projects</AppText>
       <ScrollView>

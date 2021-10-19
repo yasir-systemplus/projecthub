@@ -1,24 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import typography from '../../config/typography';
 import colors from '../../config/colors';
 import AppText from '../AppText';
 import WorkplacePicker from './WorkplacePicker';
-const workplaces = [
-  {
+import * as queries from '../../graphql/queries';
+import API from '@aws-amplify/api';
+import {graphqlOperation} from '@aws-amplify/api-graphql';
+import useAuth from '../../hooks/useAuth';
+
+export default function DashboardHeader() {
+  const {user} = useAuth();
+  const [workplace, setWorkplace] = useState({
     id: 1,
     name: 'Instashowing',
     image: require('../../assets/images/insta.png'),
-  },
-  {
-    id: 2,
-    name: 'Google',
-    image: require('../../assets/images/google.png'),
-  },
-];
+  });
 
-export default function DashboardHeader({user}) {
-  const [workplace, setWorkplace] = useState(workplaces[0]);
+  const [workplaces, setWorkplaces] = useState([
+    {
+      id: 1,
+      name: 'Instashowing',
+      image: require('../../assets/images/insta.png'),
+    },
+    {
+      id: 2,
+      name: 'Google',
+      image: require('../../assets/images/google.png'),
+    },
+  ]);
+
+  useEffect(() => {}, [user]);
+  console.log('from dashboard', user?.workspaces);
 
   const handleWorkplaceSelection = selected => {
     setWorkplace(selected);
@@ -34,7 +47,7 @@ export default function DashboardHeader({user}) {
           ]}>
           Hello,
           <AppText style={{color: colors.black}}>
-            {' Yasir' || user?.attributes.email}
+            {user?.email || ' Yasir'}
           </AppText>
         </AppText>
         <AppText style={typography.bodyLarge}>
