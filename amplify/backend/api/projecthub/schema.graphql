@@ -4,7 +4,7 @@ type Workspace @model @key(name: "byUser", fields: ["managerID"]) {
   title: String!
   description: String
 
-  managerID: ID
+  managerID: ID!
   manager: User @connection(fields: ["managerID"])
 
   projects: [Project] @connection(keyName: "byWorkspace", fields: ["id"])
@@ -34,7 +34,7 @@ type Project @model @key(name: "byWorkspace", fields: ["workspaceID"]) {
   title: String!
   description: String
 
-  workspaceID: ID
+  workspaceID: ID!
   workspace: Workspace @connection(fields: ["workspaceID"])
 
   teamLeadID: ID!
