@@ -10,14 +10,14 @@ export default function Comment({comment, style = {}}) {
         width={50}
         height={50}
         style={styles.image}
-        source={{uri: comment.profile, height: 50, width: 50}}
+        source={{uri: comment.commentator.profileURL, height: 50, width: 50}}
       />
       <View>
         <AppText style={{color: colors.heading, fontWeight: 'bold'}}>
-          {comment.commentor}
+          {comment.commentator.firstName + ' ' + comment.commentator.lastName}
         </AppText>
         <AppText style={{paddingRight: 65, color: colors.darkGrey}}>
-          {comment.message}
+          {comment.description}
         </AppText>
       </View>
     </View>

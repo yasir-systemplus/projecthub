@@ -12,7 +12,7 @@ export default function WelcomeScreen({navigation}) {
     }
   }, [user, navigation]);
 
-  console.log('User from welcome,', user);
+  // console.log('User from welcome,', user);
   return (
     <View>
       <AppButton

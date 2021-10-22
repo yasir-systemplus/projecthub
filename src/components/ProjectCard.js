@@ -1,23 +1,30 @@
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import colors from '../config/colors';
 import typography from '../config/typography';
+import routes from '../navigation/routes';
 import AppText from './AppText';
 import Card from './Card';
 import Profiles from './Profiles';
 import ProgressBar from './ProgressBar';
 
-export default function Project({title, completed, pending}) {
+export default function ProjectCard({completed = 10, pending = 4, project}) {
+  const {navigate} = useNavigation();
   const profiles = [
     {id: 1, image: 'https://picsum.photos/200'},
     {id: 2, image: 'https://picsum.photos/200'},
     {id: 3, image: 'https://picsum.photos/200'},
     {id: 4, image: 'https://picsum.photos/200'},
   ];
+  const handleOnClick = () => {
+    navigate(routes.PROJECT, {data: project});
+  };
 
+  const {title} = project;
   const percent = completed / (pending + completed);
   return (
-    <Card colors={['#fff']}>
+    <Card onPress={handleOnClick} colors={['#fff']}>
       <AppText style={[typography.heading4, {marginBottom: 8}]}>
         {title}
       </AppText>

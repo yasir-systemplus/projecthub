@@ -3,6 +3,7 @@ type Workspace @model @key(name: "byUser", fields: ["managerID"]) {
   id: ID!
   title: String!
   description: String
+  image: String
 
   managerID: ID!
   manager: User @connection(fields: ["managerID"])
@@ -14,11 +15,15 @@ type Workspace @model @key(name: "byUser", fields: ["managerID"]) {
 }
 
 type User @model {
-  id: ID!
   email: AWSEmail!
+  emailVerfied: Boolean
   firstName: String
+  id: ID!
   lastName: String
+  phoneNumber: String
+  phoneNumberVerified: Boolean
   userType: String!
+  profileURL: String
 
   workspacesBeingManaged: [Workspace]
     @connection(keyName: "byUser", fields: ["id"])
@@ -26,10 +31,27 @@ type User @model {
   workspaces: [WorkspaceMember]
     @connection(keyName: "byTeamMember", fields: ["id"])
 
-  projects: [ProjectMember] @connection(keyName: "byTeamMember", fields: ["id"])
+  projectsJoined: [ProjectMember]
+    @connection(keyName: "byProjectMember", fields: ["id"])
 }
 
-type Project @model @key(name: "byWorkspace", fields: ["workspaceID"]) {
+type ProjectMember
+  @model(queries: null)
+  @key(name: "byProject", fields: ["projectID", "userID"])
+  @key(name: "byProjectMember", fields: ["userID", "projectID"]) {
+  id: ID!
+
+  projectID: ID!
+  project: Project! @connection(fields: ["projectID"])
+
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+}
+
+type Project
+  @model
+  @key(name: "byWorkspace", fields: ["workspaceID"])
+  @key(name: "byProject", fields: ["id"]) {
   id: ID!
   title: String!
   description: String
@@ -41,7 +63,8 @@ type Project @model @key(name: "byWorkspace", fields: ["workspaceID"]) {
   teamLead: User @connection(fields: ["teamLeadID"])
 
   tasks: [Task] @connection(keyName: "byProject", fields: ["id"])
-  teamMembers: [ProjectMember] @connection(keyName: "byProject", fields: ["id"])
+  projectMembers: [ProjectMember]
+    @connection(keyName: "byProject", fields: ["id"])
 }
 
 # Reviewed
@@ -65,8 +88,10 @@ type Task @model @key(name: "byProject", fields: ["projectID"]) {
   priority: String
   description: String
   taskStatus: String
+  deadLine: String!
 
   projectID: ID!
+  project: Project @connection(fields: ["projectID"])
 
   creatorID: ID!
   creator: User @connection(fields: ["creatorID"])
@@ -100,56 +125,9 @@ type Comment
 #Reviewed
 type Attachment @model @key(name: "byTask", fields: ["taskID"]) {
   id: ID!
-  type: String!
   url: AWSURL!
   taskID: ID
+  task: Task @connection(fields: ["taskID"])
 
   comments: [Comment] @connection(keyName: "byAttachment", fields: ["id"])
-}
-
-type Project @model @key(name: "byWorkspace", fields: ["workspaceID"]) {
-  id: ID!
-  title: String!
-  description: String
-
-  workspaceID: ID!
-
-  managerID: ID!
-  manager: User @connection(fields: ["managerID"])
-
-  teamLeadID: ID!
-  teamLead: User @connection(fields: ["teamLeadID"])
-
-  tasks: [Task] @connection(keyName: "byProject", fields: ["id"])
-  teamMembers: [ProjectMember] @connection(keyName: "byProject", fields: ["id"])
-}
-
-# Reviewed
-type User @model {
-  id: ID!
-  email: AWSEmail!
-  firstName: String
-  lastName: String
-  userType: String!
-  emailVerfied: Boolean
-  phoneNumber: String
-  phoneNumberVerified: Boolean
-
-  workspaces: [WorkspaceMember]
-    @connection(keyName: "byTeamMember", fields: ["id"])
-
-  projects: [ProjectMember] @connection(keyName: "byTeamMember", fields: ["id"])
-}
-
-type ProjectMember
-  @model(queries: null)
-  @key(name: "byProject", fields: ["projectID", "teamMemberID"])
-  @key(name: "byTeamMember", fields: ["teamMemberID", "projectID"]) {
-  id: ID!
-
-  projectID: ID!
-  project: Project! @connection(fields: ["projectID"])
-
-  teamMemberID: ID!
-  teamMember: User! @connection(fields: ["teamMemberID"])
 }

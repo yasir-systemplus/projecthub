@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   View,
   StyleSheet,
   ScrollView,
   SectionList,
-  Dimensions,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import CurvedPanHeader from '../components/CurvedPanHeader';
 import CurvedBodyPan from '../components/CurvedBodyPan';
@@ -14,20 +14,15 @@ import ProfileImageWithRightDescription from '../components/ProfileImageWithRigh
 import IconWithDescription from '../components/IconWithDescription';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AppBadge from '../components/AppBadge';
-import ProfileBar from '../components/project/ProfileBar';
 import routes from '../navigation/routes';
 import ImageInput from '../components/ImageInput';
-import CommentsPan from '../components/CommentsPan';
-import * as faker from 'faker';
 import Comment from '../components/Comment';
 import colors from '../config/colors';
-const profiles = [
-  {id: 1, image: 'https://picsum.photos/200'},
-  {id: 2, image: 'https://picsum.photos/200'},
-  {id: 3, image: 'https://picsum.photos/200'},
-  {id: 4, image: 'https://picsum.photos/200'},
-];
-
+import {graphqlOperation} from '@aws-amplify/api-graphql';
+import API from '@aws-amplify/api';
+import * as queries from '../graphql/queries';
+import * as utils from '../shared/utilities';
+import CommentReply from '../components/CommentReply';
 const gallery = [
   {id: 1, image: 'https://picsum.photos/200'},
   {id: 2, image: 'https://picsum.photos/200'},
@@ -35,120 +30,160 @@ const gallery = [
   {id: 4, image: 'https://picsum.photos/200'},
 ];
 
-const comments = [
-  {
-    id: 1,
-    message:
-      'We would need to revamp colors. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
-    commentor: 'Bilal Shahzad',
-    profile: faker.internet.avatar(),
-    data: [
-      {
-        id: 3,
-        message:
-          'We need permission. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. From our boss to implement changes.',
-        commentor: 'Ali Azmat',
-        profile: faker.internet.avatar(),
-      },
-    ],
-  },
-  {
-    id: 2,
-    message:
-      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.Yes, I am making a new theme. Lor ',
-    commentor: 'Asif Khan',
-    profile: faker.internet.avatar(),
-    data: [
-      {
-        id: 1,
-        message:
-          'We would need to revamp colors. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.',
-        commentor: 'Bilal Shahzad',
-        profile: faker.internet.avatar(),
-      },
-    ],
-  },
-  {
-    id: 3,
-    message:
-      'We need permission. In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. From our boss to implement changes.',
-    commentor: 'Ali Azmat',
-    profile: faker.internet.avatar(),
-    data: [
-      {
-        id: 2,
-        message:
-          'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.Yes, I am making a new theme. Lor ',
-        commentor: 'Asif Khan',
-        profile: faker.internet.avatar(),
-      },
-    ],
-  },
-];
-export default function TaskScreen({navigation}) {
+export default function TaskScreen({navigation, route}) {
+  const {
+    id: taskId,
+    creator,
+    title,
+    description,
+    taskStatus,
+    priority,
+    deadLine,
+    assignee,
+  } = route.params.task;
+
+  const [attachments, setAttachments] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [doReply, setDoReply] = useState(false);
+
+  const project = route.params.project;
+
+  useEffect(() => {
+    fetchAttachments();
+    fetchComments();
+    return () => {};
+  }, []);
+
+  const fetchAttachments = useCallback(async () => {
+    const results = await API.graphql(
+      graphqlOperation(queries.listAttachments, {
+        filter: {
+          taskID: {
+            contains: taskId,
+          },
+        },
+      }),
+    );
+
+    setAttachments(results.data.listAttachments.items);
+  }, [taskId]);
+
+  const fetchComments = useCallback(async () => {
+    const results = await API.graphql(
+      graphqlOperation(queries.listComments, {
+        filter: {taskID: {eq: taskId}},
+      }),
+    );
+
+    Promise.all(
+      results.data.listComments.items
+        .filter(c => !c.commentedOnID)
+        .map(async c => {
+          const replies = await API.graphql(
+            graphqlOperation(queries.listComments, {
+              filter: {
+                commentedOnID: {
+                  eq: c.id,
+                },
+              },
+            }),
+          );
+
+          return {...c, data: replies.data.listComments.items || []};
+        }),
+    ).then(result => setComments(result));
+  }, [taskId]);
+
+  const handleSubmitReply = reply => {
+    console.log(reply.comment, reply.id);
+    setDoReply(false);
+  };
+
   return (
-    <SectionList
-      ListHeaderComponent={
-        <>
-          <CurvedPanHeader onBack={() => navigation.navigate(routes.PROJECT)} />
-          <CurvedBodyPan>
-            <AppText style={[typography.heading4, styles.title]}>
-              Alo Pakory Banne hen, Workshop aur Hackathon
-            </AppText>
-            <ProfileImageWithRightDescription
-              image="https://picsum.photos/200"
-              role="Team Lead"
-              name="Muhammad Yasir"
+    <>
+      <SectionList
+        ListHeaderComponent={
+          <>
+            <CurvedPanHeader
+              onBack={() =>
+                navigation.navigate(routes.PROJECT, {data: project})
+              }
             />
-            <AppText
-              style={[typography.bodyLarge, {marginTop: 5, marginBottom: 5}]}>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illowe3 inventore veritatis et quasi architecto beatae
-              vitae dicta sunt explicabo.
-            </AppText>
-            <View style={styles.statusBar}>
-              <IconWithDescription
-                name="md-flag"
-                color="red"
-                description="03/12/2021"
-                component={Ionicons}
-                border={{}}
+            <CurvedBodyPan>
+              <AppText style={[typography.heading4, styles.title]}>
+                {title}
+              </AppText>
+              <ProfileImageWithRightDescription
+                image={creator.profileURL}
+                role="Team Lead"
+                name={creator.firstName + ' ' + creator.lastName}
               />
-              <AppBadge information="High" color="#fd9b35" textColor="white" />
-              <AppBadge
-                information="In-Progress"
-                color="#8869ff"
-                textColor="white"
+              <AppText
+                style={[
+                  typography.bodyLarge,
+                  {marginVertical: 5, lineHeight: 25},
+                ]}>
+                {description}
+              </AppText>
+              <View style={styles.statusBar}>
+                <IconWithDescription
+                  name="md-flag"
+                  color="red"
+                  description={deadLine || '20/02/2012'}
+                  component={Ionicons}
+                  border={{}}
+                />
+                <AppBadge
+                  information={utils.priorityMessages[priority]}
+                  color="#fd9b35"
+                  textColor="white"
+                />
+                <AppBadge
+                  information={taskStatus}
+                  color="#8869ff"
+                  textColor="white"
+                />
+              </View>
+              <AppText style={typography.heading4}>Assigned To</AppText>
+              <ProfileImageWithRightDescription
+                image={assignee.profileURL}
+                role="Team Member"
+                name={assignee.firstName + ' ' + assignee.lastName}
               />
-            </View>
-            <AppText style={typography.heading4}>Assigned To</AppText>
+              <AppText style={typography.heading4}>Gallery</AppText>
+              <View style={styles.gallery}>
+                <ScrollView horizontal>
+                  {attachments &&
+                    attachments.map(g => (
+                      <ImageInput key={g.id} source={g.url} />
+                    ))}
+                </ScrollView>
+              </View>
+            </CurvedBodyPan>
+          </>
+        }
+        sections={comments}
+        renderItem={({item}) => <Comment comment={item} style={styles.reply} />}
+        renderSectionHeader={({section}) => (
+          <>
+            <Comment comment={section} />
+            <TouchableWithoutFeedback onPress={() => setDoReply(section.id)}>
+              <AppText style={{marginLeft: 87, color: colors.heading}}>
+                Reply
+              </AppText>
+            </TouchableWithoutFeedback>
+          </>
+        )}
+        keyExtractor={(item, index) => index}
+      />
 
-            <ProfileBar profiles={profiles} />
-            <AppText style={typography.heading4}>Gallery</AppText>
-
-            <View style={styles.gallery}>
-              <ScrollView horizontal>
-                {gallery.map(g => (
-                  <ImageInput key={g.id} source={g.image} />
-                ))}
-              </ScrollView>
-            </View>
-          </CurvedBodyPan>
-        </>
-      }
-      sections={comments}
-      renderItem={({item}) => <Comment comment={item} style={styles.reply} />}
-      renderSectionHeader={({section}) => (
-        <>
-          <Comment comment={section} />
-          <AppText style={{marginLeft: 87, color: colors.heading}}>
-            Reply
-          </AppText>
-        </>
-      )}
-      keyExtractor={(item, index) => index}
-    />
+      <CommentReply
+        visible={doReply}
+        id={doReply}
+        onSubmitComment={handleSubmitReply}
+        onClose={() => setDoReply(false)}
+      />
+    </>
   );
 }
 

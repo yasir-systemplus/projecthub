@@ -7,20 +7,25 @@ export const onCreateWorkspace = /* GraphQL */ `
       id
       title
       description
+      image
       managerID
       manager {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -59,20 +64,25 @@ export const onUpdateWorkspace = /* GraphQL */ `
       id
       title
       description
+      image
       managerID
       manager {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -111,20 +121,25 @@ export const onDeleteWorkspace = /* GraphQL */ `
       id
       title
       description
+      image
       managerID
       manager {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -160,16 +175,21 @@ export const onDeleteWorkspace = /* GraphQL */ `
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
-      id
       email
+      emailVerfied
       firstName
+      id
       lastName
+      phoneNumber
+      phoneNumberVerified
       userType
+      profileURL
       workspacesBeingManaged {
         items {
           id
           title
           description
+          image
           managerID
           createdAt
           updatedAt
@@ -186,11 +206,11 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
-      projects {
+      projectsJoined {
         items {
           id
           projectID
-          teamMemberID
+          userID
           createdAt
           updatedAt
         }
@@ -204,16 +224,21 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
-      id
       email
+      emailVerfied
       firstName
+      id
       lastName
+      phoneNumber
+      phoneNumberVerified
       userType
+      profileURL
       workspacesBeingManaged {
         items {
           id
           title
           description
+          image
           managerID
           createdAt
           updatedAt
@@ -230,11 +255,11 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
-      projects {
+      projectsJoined {
         items {
           id
           projectID
-          teamMemberID
+          userID
           createdAt
           updatedAt
         }
@@ -248,16 +273,21 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
-      id
       email
+      emailVerfied
       firstName
+      id
       lastName
+      phoneNumber
+      phoneNumberVerified
       userType
+      profileURL
       workspacesBeingManaged {
         items {
           id
           title
           description
+          image
           managerID
           createdAt
           updatedAt
@@ -274,15 +304,225 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      projects {
+      projectsJoined {
         items {
           id
           projectID
-          teamMemberID
+          userID
           createdAt
           updatedAt
         }
         nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateProjectMember = /* GraphQL */ `
+  subscription OnCreateProjectMember {
+    onCreateProjectMember {
+      id
+      projectID
+      project {
+        id
+        title
+        description
+        workspaceID
+        workspace {
+          id
+          title
+          description
+          image
+          managerID
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        projectMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        email
+        emailVerfied
+        firstName
+        id
+        lastName
+        phoneNumber
+        phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projectsJoined {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateProjectMember = /* GraphQL */ `
+  subscription OnUpdateProjectMember {
+    onUpdateProjectMember {
+      id
+      projectID
+      project {
+        id
+        title
+        description
+        workspaceID
+        workspace {
+          id
+          title
+          description
+          image
+          managerID
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        projectMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        email
+        emailVerfied
+        firstName
+        id
+        lastName
+        phoneNumber
+        phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projectsJoined {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteProjectMember = /* GraphQL */ `
+  subscription OnDeleteProjectMember {
+    onDeleteProjectMember {
+      id
+      projectID
+      project {
+        id
+        title
+        description
+        workspaceID
+        workspace {
+          id
+          title
+          description
+          image
+          managerID
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        projectMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        email
+        emailVerfied
+        firstName
+        id
+        lastName
+        phoneNumber
+        phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
+        workspaces {
+          nextToken
+        }
+        projectsJoined {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -300,16 +540,18 @@ export const onCreateProject = /* GraphQL */ `
         id
         title
         description
+        image
         managerID
         manager {
-          id
           email
-          firstName
-          lastName
-          userType
           emailVerfied
+          firstName
+          id
+          lastName
           phoneNumber
           phoneNumberVerified
+          userType
+          profileURL
           createdAt
           updatedAt
         }
@@ -324,18 +566,22 @@ export const onCreateProject = /* GraphQL */ `
       }
       teamLeadID
       teamLead {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -348,6 +594,7 @@ export const onCreateProject = /* GraphQL */ `
           priority
           description
           taskStatus
+          deadLine
           projectID
           creatorID
           assigneeID
@@ -356,11 +603,11 @@ export const onCreateProject = /* GraphQL */ `
         }
         nextToken
       }
-      teamMembers {
+      projectMembers {
         items {
           id
           projectID
-          teamMemberID
+          userID
           createdAt
           updatedAt
         }
@@ -382,16 +629,18 @@ export const onUpdateProject = /* GraphQL */ `
         id
         title
         description
+        image
         managerID
         manager {
-          id
           email
-          firstName
-          lastName
-          userType
           emailVerfied
+          firstName
+          id
+          lastName
           phoneNumber
           phoneNumberVerified
+          userType
+          profileURL
           createdAt
           updatedAt
         }
@@ -406,18 +655,22 @@ export const onUpdateProject = /* GraphQL */ `
       }
       teamLeadID
       teamLead {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -430,6 +683,7 @@ export const onUpdateProject = /* GraphQL */ `
           priority
           description
           taskStatus
+          deadLine
           projectID
           creatorID
           assigneeID
@@ -438,11 +692,11 @@ export const onUpdateProject = /* GraphQL */ `
         }
         nextToken
       }
-      teamMembers {
+      projectMembers {
         items {
           id
           projectID
-          teamMemberID
+          userID
           createdAt
           updatedAt
         }
@@ -464,16 +718,18 @@ export const onDeleteProject = /* GraphQL */ `
         id
         title
         description
+        image
         managerID
         manager {
-          id
           email
-          firstName
-          lastName
-          userType
           emailVerfied
+          firstName
+          id
+          lastName
           phoneNumber
           phoneNumberVerified
+          userType
+          profileURL
           createdAt
           updatedAt
         }
@@ -488,18 +744,22 @@ export const onDeleteProject = /* GraphQL */ `
       }
       teamLeadID
       teamLead {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -512,6 +772,7 @@ export const onDeleteProject = /* GraphQL */ `
           priority
           description
           taskStatus
+          deadLine
           projectID
           creatorID
           assigneeID
@@ -520,11 +781,11 @@ export const onDeleteProject = /* GraphQL */ `
         }
         nextToken
       }
-      teamMembers {
+      projectMembers {
         items {
           id
           projectID
-          teamMemberID
+          userID
           createdAt
           updatedAt
         }
@@ -542,15 +803,22 @@ export const onCreateWorkspaceMember = /* GraphQL */ `
       workspaceID
       workspace {
         id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
+        title
+        description
+        image
+        managerID
+        manager {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
         }
         projects {
           nextToken
@@ -563,18 +831,22 @@ export const onCreateWorkspaceMember = /* GraphQL */ `
       }
       teamMemberID
       teamMember {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -592,15 +864,22 @@ export const onUpdateWorkspaceMember = /* GraphQL */ `
       workspaceID
       workspace {
         id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
+        title
+        description
+        image
+        managerID
+        manager {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
         }
         projects {
           nextToken
@@ -613,18 +892,22 @@ export const onUpdateWorkspaceMember = /* GraphQL */ `
       }
       teamMemberID
       teamMember {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -642,36 +925,27 @@ export const onDeleteWorkspaceMember = /* GraphQL */ `
       workspaceID
       workspace {
         id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
+        title
+        description
+        image
+        managerID
+        manager {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
         }
         projects {
           nextToken
         }
-        createdAt
-        updatedAt
-      }
-      assigneeID
-      assignee {
-        id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
-        }
-        projects {
+        teamMembers {
           nextToken
         }
         createdAt
@@ -679,18 +953,22 @@ export const onDeleteWorkspaceMember = /* GraphQL */ `
       }
       teamMemberID
       teamMember {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -709,21 +987,63 @@ export const onCreateTask = /* GraphQL */ `
       priority
       description
       taskStatus
+      deadLine
       projectID
+      project {
+        id
+        title
+        description
+        workspaceID
+        workspace {
+          id
+          title
+          description
+          image
+          managerID
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        projectMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       creatorID
       creator {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -731,18 +1051,22 @@ export const onCreateTask = /* GraphQL */ `
       }
       assigneeID
       assignee {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -751,7 +1075,6 @@ export const onCreateTask = /* GraphQL */ `
       attachments {
         items {
           id
-          type
           url
           taskID
           createdAt
@@ -785,21 +1108,63 @@ export const onUpdateTask = /* GraphQL */ `
       priority
       description
       taskStatus
+      deadLine
       projectID
+      project {
+        id
+        title
+        description
+        workspaceID
+        workspace {
+          id
+          title
+          description
+          image
+          managerID
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        projectMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       creatorID
       creator {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -807,18 +1172,22 @@ export const onUpdateTask = /* GraphQL */ `
       }
       assigneeID
       assignee {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -827,7 +1196,6 @@ export const onUpdateTask = /* GraphQL */ `
       attachments {
         items {
           id
-          type
           url
           taskID
           createdAt
@@ -861,21 +1229,63 @@ export const onDeleteTask = /* GraphQL */ `
       priority
       description
       taskStatus
+      deadLine
       projectID
+      project {
+        id
+        title
+        description
+        workspaceID
+        workspace {
+          id
+          title
+          description
+          image
+          managerID
+          createdAt
+          updatedAt
+        }
+        teamLeadID
+        teamLead {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        tasks {
+          nextToken
+        }
+        projectMembers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       creatorID
       creator {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -883,18 +1293,22 @@ export const onDeleteTask = /* GraphQL */ `
       }
       assigneeID
       assignee {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -903,7 +1317,6 @@ export const onDeleteTask = /* GraphQL */ `
       attachments {
         items {
           id
-          type
           url
           taskID
           createdAt
@@ -937,18 +1350,22 @@ export const onCreateComment = /* GraphQL */ `
       taskID
       commentatorID
       commentator {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -982,18 +1399,22 @@ export const onUpdateComment = /* GraphQL */ `
       taskID
       commentatorID
       commentator {
-        id
         email
-        firstName
-        lastName
-        userType
         emailVerfied
+        firstName
+        id
+        lastName
         phoneNumber
         phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
+        }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -1023,25 +1444,26 @@ export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment {
     onDeleteComment {
       id
-      email
-      firstName
-      lastName
-      userType
-      emailVerfied
-      phoneNumber
-      phoneNumberVerified
-      workspaces {
-        items {
-          id
-          workspaceID
-          teamMemberID
-          createdAt
-          updatedAt
+      description
+      taskID
+      commentatorID
+      commentator {
+        email
+        emailVerfied
+        firstName
+        id
+        lastName
+        phoneNumber
+        phoneNumberVerified
+        userType
+        profileURL
+        workspacesBeingManaged {
+          nextToken
         }
         workspaces {
           nextToken
         }
-        projects {
+        projectsJoined {
           nextToken
         }
         createdAt
@@ -1071,24 +1493,63 @@ export const onCreateAttachment = /* GraphQL */ `
   subscription OnCreateAttachment {
     onCreateAttachment {
       id
-      email
-      firstName
-      lastName
-      userType
-      emailVerfied
-      phoneNumber
-      phoneNumberVerified
-      workspaces {
-        items {
+      url
+      taskID
+      task {
+        id
+        title
+        priority
+        description
+        taskStatus
+        deadLine
+        projectID
+        project {
           id
+          title
+          description
           workspaceID
-          teamMemberID
+          teamLeadID
           createdAt
           updatedAt
         }
-        nextToken
+        creatorID
+        creator {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        assigneeID
+        assignee {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        attachments {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
-      projects {
+      comments {
         items {
           id
           description
@@ -1110,14 +1571,63 @@ export const onUpdateAttachment = /* GraphQL */ `
   subscription OnUpdateAttachment {
     onUpdateAttachment {
       id
-      email
-      firstName
-      lastName
-      userType
-      emailVerfied
-      phoneNumber
-      phoneNumberVerified
-      workspaces {
+      url
+      taskID
+      task {
+        id
+        title
+        priority
+        description
+        taskStatus
+        deadLine
+        projectID
+        project {
+          id
+          title
+          description
+          workspaceID
+          teamLeadID
+          createdAt
+          updatedAt
+        }
+        creatorID
+        creator {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        assigneeID
+        assignee {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        attachments {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comments {
         items {
           id
           description
@@ -1139,9 +1649,62 @@ export const onDeleteAttachment = /* GraphQL */ `
   subscription OnDeleteAttachment {
     onDeleteAttachment {
       id
-      type
       url
       taskID
+      task {
+        id
+        title
+        priority
+        description
+        taskStatus
+        deadLine
+        projectID
+        project {
+          id
+          title
+          description
+          workspaceID
+          teamLeadID
+          createdAt
+          updatedAt
+        }
+        creatorID
+        creator {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        assigneeID
+        assignee {
+          email
+          emailVerfied
+          firstName
+          id
+          lastName
+          phoneNumber
+          phoneNumberVerified
+          userType
+          profileURL
+          createdAt
+          updatedAt
+        }
+        attachments {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       comments {
         items {
           id
@@ -1154,210 +1717,6 @@ export const onDeleteAttachment = /* GraphQL */ `
           updatedAt
         }
         nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateProjectMember = /* GraphQL */ `
-  subscription OnCreateProjectMember {
-    onCreateProjectMember {
-      id
-      projectID
-      project {
-        id
-        title
-        description
-        workspaceID
-        workspace {
-          id
-          email
-          firstName
-          lastName
-          userType
-          emailVerfied
-          phoneNumber
-          phoneNumberVerified
-          createdAt
-          updatedAt
-        }
-        teamLeadID
-        teamLead {
-          id
-          email
-          firstName
-          lastName
-          userType
-          emailVerfied
-          phoneNumber
-          phoneNumberVerified
-          createdAt
-          updatedAt
-        }
-        tasks {
-          nextToken
-        }
-        teamMembers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamMemberID
-      teamMember {
-        id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateProjectMember = /* GraphQL */ `
-  subscription OnUpdateProjectMember {
-    onUpdateProjectMember {
-      id
-      projectID
-      project {
-        id
-        title
-        description
-        workspaceID
-        workspace {
-          id
-          email
-          firstName
-          lastName
-          userType
-          emailVerfied
-          phoneNumber
-          phoneNumberVerified
-          createdAt
-          updatedAt
-        }
-        teamLeadID
-        teamLead {
-          id
-          email
-          firstName
-          lastName
-          userType
-          emailVerfied
-          phoneNumber
-          phoneNumberVerified
-          createdAt
-          updatedAt
-        }
-        tasks {
-          nextToken
-        }
-        teamMembers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamMemberID
-      teamMember {
-        id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteProjectMember = /* GraphQL */ `
-  subscription OnDeleteProjectMember {
-    onDeleteProjectMember {
-      id
-      projectID
-      project {
-        id
-        title
-        description
-        workspaceID
-        workspace {
-          id
-          email
-          firstName
-          lastName
-          userType
-          emailVerfied
-          phoneNumber
-          phoneNumberVerified
-          createdAt
-          updatedAt
-        }
-        teamLeadID
-        teamLead {
-          id
-          email
-          firstName
-          lastName
-          userType
-          emailVerfied
-          phoneNumber
-          phoneNumberVerified
-          createdAt
-          updatedAt
-        }
-        tasks {
-          nextToken
-        }
-        teamMembers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      teamMemberID
-      teamMember {
-        id
-        email
-        firstName
-        lastName
-        userType
-        emailVerfied
-        phoneNumber
-        phoneNumberVerified
-        workspaces {
-          nextToken
-        }
-        projects {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt

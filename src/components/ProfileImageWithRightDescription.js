@@ -9,7 +9,7 @@ export default function ProfileImageWithRightDescription({image, name, role}) {
     <View style={styles.box}>
       <FastImage style={styles.image} source={{uri: image}} />
       <AppText>
-        Created By: {name} "{role}"
+        {name} "{role}"
       </AppText>
     </View>
   );
