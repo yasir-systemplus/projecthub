@@ -4,6 +4,7 @@ import colors from '../config/colors';
 import AppText from './AppText';
 
 export default function Comment({comment, style = {}}) {
+  console.log(comment);
   return (
     <View style={[styles.contaner, style]}>
       <Image
@@ -15,6 +16,10 @@ export default function Comment({comment, style = {}}) {
       <View>
         <AppText style={{color: colors.heading, fontWeight: 'bold'}}>
           {comment.commentator.firstName + ' ' + comment.commentator.lastName}
+        </AppText>
+        <AppText style={{color: colors.heading, fontWeight: 'bold'}}>
+          {new Date(comment.createdAt).toLocaleTimeString() + ' '}
+          {new Date(comment.createdAt).toLocaleDateString()}
         </AppText>
         <AppText style={{paddingRight: 65, color: colors.darkGrey}}>
           {comment.description}

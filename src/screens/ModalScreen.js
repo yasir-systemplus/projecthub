@@ -1,47 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import typography from '../config/typography';
-import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../config/colors';
-import AppButton from './AppButton';
-import AppInput from './AppInput';
-import AppText from './AppText';
 
-export default function CommentReply({
-  onClose,
-  onSubmitComment,
-  value,
-  visible,
-}) {
-  const [comment, setComment] = useState(value);
+import AppText from '../components/AppText';
+
+export default function CommentReply({onClose, header, visible, children}) {
   return (
     <Modal animationType="slide" visible={visible} transparent={true}>
       <View style={styles.modal}>
         <View style={styles.container}>
           <View style={styles.header}>
             <AppText style={[typography.heading4, styles.headerText]}>
-              Replying
+              {header}
             </AppText>
             <TouchableWithoutFeedback onPress={onClose}>
               <Icon name="close" size={30} color="black" />
             </TouchableWithoutFeedback>
           </View>
-
-          <AppText style={styles.label}>Select Priority</AppText>
-          <AppInput
-            multiline={true}
-            numberOfLines={4}
-            onChangeText={text => setComment(text)}
-            value={comment}
-          />
-          <AppButton
-            value="Submit"
-            onPress={() => {
-              onSubmitComment({comment});
-              onClose();
-            }}
-          />
+          <View>{children}</View>
         </View>
       </View>
     </Modal>

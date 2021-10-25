@@ -5,7 +5,12 @@ import RoundButton from './RoundButton';
 import Icon from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/core';
 
-export default function CurvedPanHeader({onBack, ...otherProps}) {
+export default function CurvedPanHeader({
+  title,
+  onBack,
+  onMenuToggle,
+  ...otherProps
+}) {
   return (
     <View style={styles.container} {...otherProps}>
       <RoundButton
@@ -14,8 +19,9 @@ export default function CurvedPanHeader({onBack, ...otherProps}) {
         color={'#3e405c'}
         name="chevron-left"
       />
-      <AppText>In - Progress</AppText>
+      <AppText>{title}</AppText>
       <RoundButton
+        onPress={onMenuToggle}
         component={Icon}
         color={'#3e405c'}
         name="dots-three-vertical"

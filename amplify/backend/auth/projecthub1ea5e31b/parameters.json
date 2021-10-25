@@ -1,6 +1,6 @@
 {
     "identityPoolName": "projecthub1ea5e31b_identitypool_1ea5e31b",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "projec1ea5e31b",
     "userPoolName": "projecthub1ea5e31b_userpool_1ea5e31b",
     "autoVerifiedAttributes": [

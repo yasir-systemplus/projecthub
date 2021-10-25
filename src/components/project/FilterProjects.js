@@ -6,23 +6,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Picker} from '@react-native-picker/picker';
 import colors from '../../config/colors';
 import AppButton from '../AppButton';
+import {taskStatuses, priorityTypes} from '../../shared/utilities';
 
 export default function FilterTasks({visible, onApplyFilter, onClose}) {
   const [taskType, settaskType] = useState(0);
   const [priority, setPriority] = useState(0);
-  const taskTypes = [
-    {id: 0, name: 'All'},
-    {id: 1, name: 'New'},
-    {id: 2, name: 'In Progress'},
-    {id: 3, name: 'Finished'},
-  ];
 
-  const priorityTypes = [
-    {id: 0, name: 'All'},
-    {id: 3, name: 'High'},
-    {id: 2, name: 'Medium'},
-    {id: 1, name: 'Low'},
-  ];
   return (
     <Modal animationType="slide" visible={visible} transparent={true}>
       <View style={styles.modal}>
@@ -41,7 +30,7 @@ export default function FilterTasks({visible, onApplyFilter, onClose}) {
               mode={'dropdown'}
               selectedValue={taskType}
               onValueChange={(itemValue, index) => settaskType(itemValue)}>
-              {taskTypes.map(p => (
+              {taskStatuses.map(p => (
                 <Picker.Item
                   color="black"
                   key={p.id}

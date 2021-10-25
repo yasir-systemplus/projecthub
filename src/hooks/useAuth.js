@@ -90,7 +90,6 @@ export default function useAuth() {
           }),
         );
 
-        console.log(dbUser);
         return {
           ...authUserData,
           ...dbUser,

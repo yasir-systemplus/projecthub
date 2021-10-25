@@ -43,5 +43,11 @@
         ]
       }
     }
+  },
+  "storage": {
+    "projectHub": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

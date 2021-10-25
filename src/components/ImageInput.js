@@ -1,15 +1,18 @@
 import React from 'react';
 import {Image, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export default function ImageInput({source, onChangeImage, onAddImage}) {
-  const launchImageLibrary = () => {};
   const loadImage = () => {
     launchImageLibrary(null, resp => {
       if (!resp.didCancel) {
-        const {uri} = resp.assets[0];
+        const imageData = resp.assets[0];
+        console.log(resp);
         if (!source) {
-          onChangeImage(uri);
+          onAddImage(imageData);
+        } else {
+          onChangeImage(imageData);
         }
       }
     });
