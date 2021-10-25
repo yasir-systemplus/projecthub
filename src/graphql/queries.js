@@ -20,12 +20,35 @@ export const getWorkspace = /* GraphQL */ `
         userType
         profileURL
         workspacesBeingManaged {
+          items {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         workspaces {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectsJoined {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -37,7 +60,35 @@ export const getWorkspace = /* GraphQL */ `
           title
           description
           workspaceID
+          workspace {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           teamLeadID
+          teamLead {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          tasks {
+            nextToken
+          }
+          projectMembers {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -47,7 +98,29 @@ export const getWorkspace = /* GraphQL */ `
         items {
           id
           workspaceID
+          workspace {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           teamMemberID
+          teamMember {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -81,13 +154,38 @@ export const listWorkspaces = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         projects {
+          items {
+            id
+            title
+            description
+            workspaceID
+            teamLeadID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         teamMembers {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -116,6 +214,25 @@ export const getUser = /* GraphQL */ `
           description
           image
           managerID
+          manager {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          projects {
+            nextToken
+          }
+          teamMembers {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -125,7 +242,29 @@ export const getUser = /* GraphQL */ `
         items {
           id
           workspaceID
+          workspace {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           teamMemberID
+          teamMember {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -135,7 +274,29 @@ export const getUser = /* GraphQL */ `
         items {
           id
           projectID
+          project {
+            id
+            title
+            description
+            workspaceID
+            teamLeadID
+            createdAt
+            updatedAt
+          }
           userID
+          user {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -164,12 +325,35 @@ export const listUsers = /* GraphQL */ `
         userType
         profileURL
         workspacesBeingManaged {
+          items {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         workspaces {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectsJoined {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -202,13 +386,38 @@ export const getProject = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         projects {
+          items {
+            id
+            title
+            description
+            workspaceID
+            teamLeadID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         teamMembers {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -226,12 +435,35 @@ export const getProject = /* GraphQL */ `
         userType
         profileURL
         workspacesBeingManaged {
+          items {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         workspaces {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectsJoined {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -246,8 +478,49 @@ export const getProject = /* GraphQL */ `
           taskStatus
           deadLine
           projectID
+          project {
+            id
+            title
+            description
+            workspaceID
+            teamLeadID
+            createdAt
+            updatedAt
+          }
           creatorID
+          creator {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           assigneeID
+          assignee {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          attachments {
+            nextToken
+          }
+          comments {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -257,7 +530,29 @@ export const getProject = /* GraphQL */ `
         items {
           id
           projectID
+          project {
+            id
+            title
+            description
+            workspaceID
+            teamLeadID
+            createdAt
+            updatedAt
+          }
           userID
+          user {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -286,6 +581,25 @@ export const listProjects = /* GraphQL */ `
           description
           image
           managerID
+          manager {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          projects {
+            nextToken
+          }
+          teamMembers {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -300,13 +614,42 @@ export const listProjects = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         tasks {
+          items {
+            id
+            title
+            priority
+            description
+            taskStatus
+            deadLine
+            projectID
+            creatorID
+            assigneeID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectMembers {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -337,6 +680,25 @@ export const getTask = /* GraphQL */ `
           description
           image
           managerID
+          manager {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          projects {
+            nextToken
+          }
+          teamMembers {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -351,13 +713,42 @@ export const getTask = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         tasks {
+          items {
+            id
+            title
+            priority
+            description
+            taskStatus
+            deadLine
+            projectID
+            creatorID
+            assigneeID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectMembers {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -375,12 +766,35 @@ export const getTask = /* GraphQL */ `
         userType
         profileURL
         workspacesBeingManaged {
+          items {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         workspaces {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectsJoined {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -398,12 +812,35 @@ export const getTask = /* GraphQL */ `
         userType
         profileURL
         workspacesBeingManaged {
+          items {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         workspaces {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectsJoined {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -414,6 +851,22 @@ export const getTask = /* GraphQL */ `
           id
           url
           taskID
+          task {
+            id
+            title
+            priority
+            description
+            taskStatus
+            deadLine
+            projectID
+            creatorID
+            assigneeID
+            createdAt
+            updatedAt
+          }
+          comments {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -425,8 +878,24 @@ export const getTask = /* GraphQL */ `
           description
           taskID
           commentatorID
+          commentator {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           commentedOnID
           attachmentID
+          replies {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -457,7 +926,35 @@ export const listTasks = /* GraphQL */ `
           title
           description
           workspaceID
+          workspace {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           teamLeadID
+          teamLead {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          tasks {
+            nextToken
+          }
+          projectMembers {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -472,6 +969,15 @@ export const listTasks = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -486,13 +992,39 @@ export const listTasks = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         attachments {
+          items {
+            id
+            url
+            taskID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         comments {
+          items {
+            id
+            description
+            taskID
+            commentatorID
+            commentedOnID
+            attachmentID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -520,12 +1052,35 @@ export const getComment = /* GraphQL */ `
         userType
         profileURL
         workspacesBeingManaged {
+          items {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         workspaces {
+          items {
+            id
+            workspaceID
+            teamMemberID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         projectsJoined {
+          items {
+            id
+            projectID
+            userID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -539,8 +1094,24 @@ export const getComment = /* GraphQL */ `
           description
           taskID
           commentatorID
+          commentator {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           commentedOnID
           attachmentID
+          replies {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -573,12 +1144,31 @@ export const listComments = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         commentedOnID
         attachmentID
         replies {
+          items {
+            id
+            description
+            taskID
+            commentatorID
+            commentedOnID
+            attachmentID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -607,7 +1197,35 @@ export const getAttachment = /* GraphQL */ `
           title
           description
           workspaceID
+          workspace {
+            id
+            title
+            description
+            image
+            managerID
+            createdAt
+            updatedAt
+          }
           teamLeadID
+          teamLead {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          tasks {
+            nextToken
+          }
+          projectMembers {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -622,6 +1240,15 @@ export const getAttachment = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -636,13 +1263,39 @@ export const getAttachment = /* GraphQL */ `
           phoneNumberVerified
           userType
           profileURL
+          workspacesBeingManaged {
+            nextToken
+          }
+          workspaces {
+            nextToken
+          }
+          projectsJoined {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         attachments {
+          items {
+            id
+            url
+            taskID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         comments {
+          items {
+            id
+            description
+            taskID
+            commentatorID
+            commentedOnID
+            attachmentID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -654,8 +1307,24 @@ export const getAttachment = /* GraphQL */ `
           description
           taskID
           commentatorID
+          commentator {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           commentedOnID
           attachmentID
+          replies {
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -685,12 +1354,63 @@ export const listAttachments = /* GraphQL */ `
           taskStatus
           deadLine
           projectID
+          project {
+            id
+            title
+            description
+            workspaceID
+            teamLeadID
+            createdAt
+            updatedAt
+          }
           creatorID
+          creator {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
           assigneeID
+          assignee {
+            email
+            emailVerfied
+            firstName
+            id
+            lastName
+            phoneNumber
+            phoneNumberVerified
+            userType
+            profileURL
+            createdAt
+            updatedAt
+          }
+          attachments {
+            nextToken
+          }
+          comments {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         comments {
+          items {
+            id
+            description
+            taskID
+            commentatorID
+            commentedOnID
+            attachmentID
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt

@@ -55,7 +55,6 @@ export default function Dashboard({navigation}) {
           },
         }),
       );
-
       setProjects(results.data.listProjects.items);
     }
   }, [workspace]);

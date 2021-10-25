@@ -41,7 +41,7 @@ export default function TaskScreen({navigation, route}) {
     assigneeID,
   } = task;
 
-  const [attachments, setAttachments] = useState(null);
+  const [attachments, setAttachments] = useState([]);
   const [comments, setComments] = useState([]);
   const [targetComment, setTargetComment] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
@@ -197,19 +197,30 @@ export default function TaskScreen({navigation, route}) {
       });
   };
 
-  const handleUploadImage = async ({uri}) => {
-    // Storage.put(Date.now(), url, {
-    //   resumable: true,
-    //   completeCallback: event => {
-    //     console.log(`Successfully uploaded ${event}`);
-    //   },
-    //   progressCallback: progress => {
-    //     console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-    //   },
-    //   errorCallback: err => {
-    //     console.error('Unexpected error while uploading', err);
-    //   },
-    // });
+  const handleUploadImage = async ({fileName, type, uri, width, height}) => {
+    setLoading(true);
+    const photo = await fetch(uri);
+    const photoBlob = await photo.blob();
+
+    await Storage.put(fileName, photoBlob, {
+      level: 'public',
+      contentType: type,
+    });
+
+    const newAttachment = await API.graphql(
+      graphqlOperation(mutations.createAttachment, {
+        input: {
+          taskID: taskId,
+          url: await Storage.get(fileName, {level: 'public'}),
+        },
+      }),
+    );
+    const newAttachments = [
+      ...attachments,
+      newAttachment.data.createAttachment,
+    ];
+    setAttachments(newAttachments);
+    setLoading(false);
   };
   return (
     <Screen styles={{paddingHorizontal: 0}} loading={loading}>

@@ -8,9 +8,9 @@ type Workspace @model @key(name: "byUser", fields: ["managerID"]) {
   managerID: ID!
   manager: User @connection(fields: ["managerID"])
 
-  projects: [Project] @connection(keyName: "byWorkspace", fields: ["id"])
+  projects: [Project]! @connection(keyName: "byWorkspace", fields: ["id"])
 
-  teamMembers: [WorkspaceMember]
+  teamMembers: [WorkspaceMember]!
     @connection(keyName: "byWorkspace", fields: ["id"])
 }
 
@@ -25,20 +25,20 @@ type User @model {
   userType: String!
   profileURL: String
 
-  workspacesBeingManaged: [Workspace]
+  workspacesBeingManaged: [Workspace]!
     @connection(keyName: "byUser", fields: ["id"])
 
-  workspaces: [WorkspaceMember]
+  workspaces: [WorkspaceMember]!
     @connection(keyName: "byTeamMember", fields: ["id"])
 
-  projectsJoined: [ProjectMember]
-    @connection(keyName: "byProjectMember", fields: ["id"])
+  projectsJoined: [ProjectMember]!
+    @connection(keyName: "byUser", fields: ["id"])
 }
 
 type ProjectMember
   @model(queries: null)
   @key(name: "byProject", fields: ["projectID", "userID"])
-  @key(name: "byProjectMember", fields: ["userID", "projectID"]) {
+  @key(name: "byUser", fields: ["userID", "projectID"]) {
   id: ID!
 
   projectID: ID!
@@ -62,8 +62,8 @@ type Project
   teamLeadID: ID!
   teamLead: User @connection(fields: ["teamLeadID"])
 
-  tasks: [Task] @connection(keyName: "byProject", fields: ["id"])
-  projectMembers: [ProjectMember]
+  tasks: [Task]! @connection(keyName: "byProject", fields: ["id"])
+  projectMembers: [ProjectMember]!
     @connection(keyName: "byProject", fields: ["id"])
 }
 
@@ -99,8 +99,8 @@ type Task @model @key(name: "byProject", fields: ["projectID"]) {
   assigneeID: ID!
   assignee: User @connection(fields: ["assigneeID"])
 
-  attachments: [Attachment] @connection(fields: ["id"])
-  comments: [Comment] @connection(fields: ["id"])
+  attachments: [Attachment]! @connection(fields: ["id"])
+  comments: [Comment]! @connection(fields: ["id"])
 }
 
 type Comment
@@ -119,7 +119,7 @@ type Comment
 
   attachmentID: ID
 
-  replies: [Comment] @connection(fields: ["id"])
+  replies: [Comment]! @connection(fields: ["id"])
 }
 
 #Reviewed
@@ -129,5 +129,5 @@ type Attachment @model @key(name: "byTask", fields: ["taskID"]) {
   taskID: ID
   task: Task @connection(fields: ["taskID"])
 
-  comments: [Comment] @connection(keyName: "byAttachment", fields: ["id"])
+  comments: [Comment]! @connection(keyName: "byAttachment", fields: ["id"])
 }

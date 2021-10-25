@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import Profiles from '../Profiles';
 import colors from '../../config/colors';
-export default function ProfileBar({profiles}) {
+import Icon from 'react-native-vector-icons/AntDesign';
+export default function ProfileBar({profiles, onAdd}) {
   return (
     <View style={styles.container}>
       <Profiles profiles={profiles} size={40} />
+      <TouchableWithoutFeedback style={styles.add} onPress={onAdd}>
+        <Icon name="plus" size={32} />
+      </TouchableWithoutFeedback>
     </View>
   );
 }
@@ -32,5 +36,10 @@ const styles = StyleSheet.create({
     borderColor: colors.lightGrey,
     backgroundColor: 'white',
     opacity: 0.8,
+  },
+  add: {
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
   },
 });

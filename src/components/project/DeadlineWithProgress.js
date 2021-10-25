@@ -5,20 +5,20 @@ import Icon from 'react-native-vector-icons/Feather';
 import colors from '../../config/colors';
 import AppText from '../AppText';
 
-export default function DeadlineWithProgress() {
+export default function DeadlineWithProgress({dateCreated, progress}) {
   return (
     <View style={styles.container}>
       <View style={styles.deadlineBtn}>
         <Icon style={{marginRight: 10}} color="#3e405c" name="bell" size={25} />
         <AppText>Deadline: </AppText>
         <AppText style={{fontWeight: 'bold', color: '#3e405c'}}>
-          30 Sep, 2021{' '}
+          {dateCreated}
         </AppText>
       </View>
       <Progress.Circle
         showsText
         color={colors.heading}
-        progress={0.5}
+        progress={progress}
         thickness={2}
         size={50}
         textStyle={{fontWeight: 'bold'}}
