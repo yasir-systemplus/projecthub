@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import colors from '../config/colors';
-import typography from '../config/typography';
-import routes from '../navigation/routes';
+import colors from '~config/colors';
+import typography from '~config/typography';
+import routes from '~navigation/routes';
 import AppText from './AppText';
 import Card from './Card';
 import Profiles from './Profiles';

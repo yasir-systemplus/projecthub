@@ -1,15 +1,15 @@
 import React, {useEffect, useCallback, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import Screen from './Screen';
-import DashboardHeader from '../components/dashboard/DashboardHeader';
-import FeatureCard from '../components/dashboard/FeatureCard';
-import ProjectCard from '../components/ProjectCard';
-import AppText from '../components/AppText';
-import typography from '../config/typography';
-import * as queries from '../graphql/queries';
+import DashboardHeader from '~components/dashboard/DashboardHeader';
+import FeatureCard from '~components/dashboard/FeatureCard';
+import ProjectCard from '~components/ProjectCard';
+import AppText from '~components/AppText';
+import typography from '~config/typography';
+import * as queries from '~graphql/queries';
 import {graphqlOperation} from '@aws-amplify/api-graphql';
 import API from '@aws-amplify/api';
-import useAuth from '../hooks/useAuth';
+import useAuth from '~hooks/useAuth';
 
 export default function Dashboard({navigation}) {
   const [loader, setLoader] = useState(true);

@@ -1,10 +1,9 @@
 import React from 'react';
 import {View, Image, StyleSheet, Text} from 'react-native';
-import colors from '../config/colors';
+import colors from '~config/colors';
 import AppText from './AppText';
 
 export default function Comment({comment, style = {}}) {
-  console.log(comment);
   return (
     <View style={[styles.contaner, style]}>
       <Image

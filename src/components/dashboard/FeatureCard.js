@@ -1,9 +1,10 @@
 import React from 'react';
-import colors from '../../config/colors';
-import typography from '../../config/typography';
-import AppButton from '../AppButton';
-import AppText from '../AppText';
-import Card from '../Card';
+
+import colors from '~config/colors';
+import typography from '~config/typography';
+import AppButton from '~components/AppButton';
+import AppText from '~components/AppText';
+import Card from '~components/Card';
 import {StyleSheet} from 'react-native';
 
 export default function FeatureCard() {

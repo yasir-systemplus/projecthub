@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../config/colors';
+import colors from '~config/colors';
 
 export default function FloatingButton({onPress}) {
   return (

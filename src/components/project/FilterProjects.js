@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
-import AppText from '../AppText';
-import typography from '../../config/typography';
+import AppText from '~components/AppText';
+import typography from '~config/typography';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Picker} from '@react-native-picker/picker';
-import colors from '../../config/colors';
-import AppButton from '../AppButton';
-import {taskStatuses, priorityTypes} from '../../shared/utilities';
+import colors from '~config/colors';
+import AppButton from '~components/AppButton';
+import {taskStatuses, priorityTypes} from '~shared/utilities';
 
 export default function FilterTasks({visible, onApplyFilter, onClose}) {
   const [taskType, settaskType] = useState(0);

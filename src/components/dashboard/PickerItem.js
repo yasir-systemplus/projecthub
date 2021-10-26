@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import AppText from '../AppText';
+import AppText from '~components/AppText';
 import PickerImage from './PickerImage';
-import typography from '../../config/typography';
+import typography from '~config/typography';
 export default function PickerItem({item: workplace, onPress}) {
   return (
     <TouchableOpacity onPress={onPress}>

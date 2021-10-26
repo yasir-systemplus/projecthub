@@ -1,7 +1,7 @@
 import React from 'react';
-import {Touchable, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
-import colors from '../../config/colors';
+import colors from '~config/colors';
 
 export default function MenuDots({onPress}) {
   return (

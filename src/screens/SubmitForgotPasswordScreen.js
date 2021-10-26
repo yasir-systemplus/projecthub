@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import AppForm from '../components/AppForm';
-import FormButton from '../components/FormButton';
-import FormField from '../components/FormField';
+import AppForm from '~components/AppForm';
+import FormButton from '~components/FormButton';
+import FormField from '~components/FormField';
 import * as Yup from 'yup';
-import {forgotPasswordSubmit} from '../services/auth';
-import routes from '../navigation/routes';
+import routes from '~navigation/routes';
 
 export default function SubmitForgotPasswordScreen({navigation}) {
   const schema = Yup.object().shape({

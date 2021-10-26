@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
-import typograpy from '../config/typography';
+import typograpy from '~config/typography';
 
 export default function AppInput({...props}) {
   return (

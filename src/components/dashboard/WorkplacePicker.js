@@ -1,14 +1,7 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Modal,
-  FlatList,
-} from 'react-native';
-import AppText from '../AppText';
-import typography from '../../config/typography';
+import {View, StyleSheet, Modal, FlatList} from 'react-native';
+import AppText from '~components/AppText';
+import typography from '~config/typography';
 import PickerItem from './PickerItem';
 import PickerImage from './PickerImage';
 import PickerSeparator from './PickerSeparator';

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {loginToAWS, currentUserInfo, AWSLogout} from '../services/auth';
+import {loginToAWS, currentUserInfo, AWSLogout} from '~services/auth';
 import {Auth, Hub, API, graphqlOperation} from 'aws-amplify';
-import * as queries from '../graphql/queries';
-import * as mutations from '../graphql/mutations';
+import * as queries from '~graphql/queries';
+import * as mutations from '~graphql/mutations';
 
 export default function useAuth() {
   const [user, setUser] = useState(null);

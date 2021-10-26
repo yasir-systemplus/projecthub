@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import AppForm from '../components/AppForm';
-import FormField from '../components/FormField';
-import FormButton from '../components/FormButton';
-import {forgotPassword} from '../services/auth';
+import AppForm from '~components/AppForm';
+import FormField from '~components/FormField';
+import FormButton from '~components/FormButton';
+import {forgotPassword} from '~services/auth';
 import * as Yup from 'yup';
-import routes from '../navigation/routes';
+import routes from '~navigation/routes';
 
 export default function ForgotPasswordScreen({navigation}) {
   const [loading, setLoading] = useState(false);

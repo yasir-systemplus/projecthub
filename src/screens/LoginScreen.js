@@ -1,17 +1,17 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import Screen from './Screen';
-import FormField from '../components/FormField';
-import AppForm from '../components/AppForm';
-import {LoginButton} from '../components/LoginButton';
-import Logo from '../assets/images/logo.svg';
-import AppButton from '../components/AppButton';
+import FormField from '~components/FormField';
+import AppForm from '~components/AppForm';
+import {LoginButton} from '~components/LoginButton';
+import Logo from '~assets/images/logo.svg';
+import AppButton from '~components/AppButton';
 import * as Yup from 'yup';
-import {completeNewPassword} from '../services/auth';
-import colors from '../config/colors';
-import typography from '../config/typography';
-import routes from '../navigation/routes';
-import useAuth from '../hooks/useAuth';
+import {completeNewPassword} from '~services/auth';
+import colors from '~config/colors';
+import typography from '~config/typography';
+import routes from '~navigation/routes';
+import useAuth from '~hooks/useAuth';
 
 export default function LoginScreen({navigation}) {
   const {user, login} = useAuth();
@@ -83,7 +83,7 @@ export default function LoginScreen({navigation}) {
               transform: [{scale: 0.8}],
             },
           ]}
-          source={require('../assets/blur.png')}
+          source={require('~assets/blur.png')}
         />
       </View>
       <View style={styles.logo}>

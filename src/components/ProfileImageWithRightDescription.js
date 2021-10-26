@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import colors from '../config/colors';
+
 import AppText from './AppText';
 
 export default function ProfileImageWithRightDescription({image, name, role}) {

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import DashboardScreen from '../screens/Dashboard';
+import DashboardScreen from '~screens/Dashboard';
 import routes from './routes';
-import ProjectScreen from '../screens/ProjectScreen';
-import TaskScreen from '../screens/TaskScreen';
+import ProjectScreen from '~screens/ProjectScreen';
+import TaskScreen from '~screens/TaskScreen';
 
 const Stack = createNativeStackNavigator();
 

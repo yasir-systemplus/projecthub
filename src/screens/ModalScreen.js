@@ -2,10 +2,10 @@ import React from 'react';
 import {View, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import typography from '../config/typography';
-import colors from '../config/colors';
+import typography from '~config/typography';
+import colors from '~config/colors';
 
-import AppText from '../components/AppText';
+import AppText from '~components/AppText';
 
 export default function CommentReply({onClose, header, visible, children}) {
   return (

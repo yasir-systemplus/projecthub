@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/Feather';
-import colors from '../../config/colors';
-import AppText from '../AppText';
+import colors from '~config/colors';
+import AppText from '~components/AppText';
 
 export default function DeadlineWithProgress({dateCreated, progress}) {
   return (

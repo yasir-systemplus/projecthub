@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import typography from '../../config/typography';
-import colors from '../../config/colors';
-import AppText from '../AppText';
+import typography from '~config/typography';
+import colors from '~config/colors';
+import AppText from '~components/AppText';
 import WorkplacePicker from './WorkplacePicker';
 
 export default function DashboardHeader({

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
 
-import typography from '../config/typography';
+import typography from '~config/typography';
 import Icon from 'react-native-vector-icons/Ionicons';
-import colors from '../config/colors';
+import colors from '~config/colors';
 import AppButton from './AppButton';
 import AppInput from './AppInput';
 import AppText from './AppText';

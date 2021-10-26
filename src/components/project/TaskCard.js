@@ -1,11 +1,19 @@
 import React from 'react';
 import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import typography from '../../config/typography';
-import AppText from '../AppText';
-import IconWithDescription from '../IconWithDescription';
+import typography from '~config/typography';
+import AppText from '~components/AppText';
+import IconWithDescription from '~components/IconWithDescription';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import * as utils from '~shared/utilities';
+export default function TaskCard({
+  title,
+  description,
 
-export default function TaskCard({title, description, comments, onPress}) {
+  onPress,
+  deadLine,
+  ...others
+}) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
@@ -16,21 +24,21 @@ export default function TaskCard({title, description, comments, onPress}) {
         <AppText numberOfLines={2}>{description}</AppText>
         <View style={styles.iconContainer}>
           <IconWithDescription
-            name="comment"
-            component={EvilIcon}
-            description={comments.length}
+            name="speedometer-outline"
+            component={Ionicons}
+            description={utils.priorityMessages[others.priority]}
           />
-          {/* <IconWithDescription
+          <IconWithDescription
             name="calendar"
             component={EvilIcon}
-            description={completionDate}
-          /> */}
+            description={deadLine}
+          />
 
-          {/* <IconWithDescription
-            name="paperclip"
+          <IconWithDescription
+            name="exclamation"
             component={EvilIcon}
-            description={attachments}
-          /> */}
+            description={utils.taskStatusMessages[others.taskStatus]}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
